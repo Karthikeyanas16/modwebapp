@@ -59,7 +59,7 @@
         <div class="form-group" *ngIf="isTrainer">
           <label for="tech">Technology<span class="required">*</span></label>
           <div class="form-group">
-            <select class="form-control" formControlName="selectTech" name="tech" id="tech">
+            <select class="form-control" formControlName="selectedTech" name="tech" id="tech">
               <option value="" disabled selected>Choose technology</option>
               <option *ngFor="let tech of techList" [ngValue]="tech" (change)="changeTechnology($event.target.value)">
                 {{tech}}
