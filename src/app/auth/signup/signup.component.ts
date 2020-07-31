@@ -3,7 +3,7 @@ import {
   FormGroup,
   Validators,
   FormBuilder
-} from "@angular/forms";
+} from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 @Component({
@@ -14,23 +14,44 @@ import { Router } from '@angular/router';
 export class SignupComponent implements OnInit {
   form: FormGroup;
   msgStatus = { status: false, type: true, message: '' };
+  isTrainer: boolean;
+  techList: any = ['Java Full Stack', 'MEAN/MERN Stack', 'Python', 'C/C++'];
   constructor(private fb: FormBuilder, private authService: AuthService, private route: Router) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
+      name: ['', [Validators.required]],
       email: ['', [
         Validators.required,
-        Validators.pattern("[^ @]*@[^ @]*")]],
+        Validators.pattern('[^ @]*@[^ @]*')]],
       password: ['', [
         Validators.required,
         Validators.minLength(8)]],
+      accountType: ['student', [
+        Validators.required]],
+      selectTech: ['', [Validators.required]]
     });
+    this.selectTechValidators();
+  }
+  selectTechValidators() {
+    const accountType = this.form.get('accountType');
+    const selectTech = this.form.get('selectTech');
+    if (accountType.value === 'trainer') {
+      selectTech.setValidators(Validators.required);
+    } else {
+      selectTech.setValidators(null);
+      selectTech.setValue('');
+    }
+    selectTech.updateValueAndValidity();
   }
   signUp() {
     if (this.form.valid) {
       const reqBody = new User(
+        this.form.value.name,
         this.form.value.email,
-        this.form.value.password
+        this.form.value.password,
+        this.form.value.accountType,
+        this.form.value.selectTech
       );
       this.authService.createUser(reqBody).subscribe(res => {
         this.msgStatus.status = true;
@@ -57,9 +78,16 @@ export class SignupComponent implements OnInit {
       this.msgStatus.status = false;
     }, 5000);
   }
+  changeAccType(type: string) {
+    type === 'trainer' ? this.isTrainer = true : this.isTrainer = false;
+    this.selectTechValidators();
+  }
+  changeTechnology(selected) {
+    this.form.value.selectTech.setValue(selected, {
+      onlySelf: true
+    });
+  }
 }
 export class User {
-  constructor(public username: string, public password: string) {
-
-  }
+  constructor(public name: string, public username: string, public password: string, public accountType: string, public selectTech: string) { }
 }
