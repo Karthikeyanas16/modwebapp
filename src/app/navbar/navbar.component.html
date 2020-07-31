@@ -1,0 +1,134 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" style="margin-left: auto !important" [routerLink]="['/']">
+    <img src="../../assets/logo/mod-logo.png" width="60" height="60" class="d-inline-block" alt="logo">
+  </a>
+  <a class="nav-item  menu_btn" (click)="display = true" *ngIf="isLoggedIn">
+    <img class="user-avatar"
+      src="https://scontent.fbom26-1.fna.fbcdn.net/v/t1.0-1/c0.8.240.240a/p240x240/72726566_2433032706793550_7724302762627825664_o.jpg?_nc_cat=104&_nc_sid=dbb9e7&_nc_ohc=xNSPwgN26IwAX9BU4jP&_nc_ht=scontent.fbom26-1.fna&oh=0c4c7e0ec44b204c2e88bb636d951798&oe=5F1A2F0F">
+  </a>
+  <p-sidebar [(visible)]="display" styleClass="ui-sidebar-sm" position="right">
+    <ul class="list-group mt-3">
+      <li class="list-group-item">
+        <div style="text-align: center;">
+          <a [routerLink]="['mentor/profile']">
+            <img class="user-avatar" style="width: 80px; text-align: center;  margin: auto;"
+              src="https://scontent.fbom26-1.fna.fbcdn.net/v/t1.0-1/c0.8.240.240a/p240x240/72726566_2433032706793550_7724302762627825664_o.jpg?_nc_cat=104&_nc_sid=dbb9e7&_nc_ohc=xNSPwgN26IwAX9BU4jP&_nc_ht=scontent.fbom26-1.fna&oh=0c4c7e0ec44b204c2e88bb636d951798&oe=5F1A2F0F">
+          </a>
+        </div>
+        <div style="text-align: center;">
+          <strong> dsjadhav92@gmail.com</strong>
+        </div>
+      </li>
+      <li class="list-group-item"> <a [routerLink]="['mentor/profile']">My trainings</a></li>
+      <li class="list-group-item"> <a [routerLink]="['mentor/profile']">My cart</a>
+      </li>
+      <li class="list-group-item"> <a [routerLink]="['mentor/profile']">Notifications</a></li>
+      <li class="list-group-item"> <a [routerLink]="['mentor/profile']">Account settings</a></li>
+      <li class="list-group-item"> <a [routerLink]="['mentor/profile']">Payment methods</a></li>
+      <li class="list-group-item"><a [routerLink]="['mentor/profile']">Purchase history</a>
+      </li>
+      <li class="list-group-item"> <a [routerLink]="['mentor/profile']">Edit profile</a> </li>
+      <li class="list-group-item"> <a [routerLink]="['mentor/public-profile']">Public profile</a>
+      </li>
+      <li class="list-group-item"> <a [routerLink]="['mentor/profile']">Help</a></li>
+      <li class="list-group-item"> <a (click)="doLogout()">Logout</a></li>
+    </ul>
+  </p-sidebar>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+      <li class="nav-item" style="text-align: center;">
+        <a class="nav-link" href="#">Current Trainings</a>
+      </li>
+      <li class="nav-item" style="text-align: center;">
+        <a class="nav-link" href="#">Completed Trainings</a>
+      </li>
+      <li class="nav-item" style="text-align: center;">
+        <a class="nav-link" href="#">Students Proposals</a>
+      </li>
+      <li class="nav-item" style="text-align: center;">
+        <div class="dropdown nav-link">
+          <button class="dropbtn">Payments</button>
+          <div class="dropdown-content sub-content">
+            <a href="#">View History</a>
+            <a href="#">Withdraw</a>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item" style="text-align: center;">
+        <div class="dropdown nav-link">
+          <button class="dropbtn">Skills</button>
+          <div class="dropdown-content sub-content">
+            <a href="#">Add Skills</a>
+            <a href="#">Edit Skills</a>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn" style="margin: auto;">
+        <div class="dropdown">
+          <a class="btn btn-outline-info login-btn not-badge-btn dropbtn"><i class="fas fa-shopping-bag"
+              style="font-size: 20px;"></i></a>
+          <div class="dropdown-content">
+            <a [routerLink]="['mentor/profile']" class="text-center"><strong>Your card is empty.</strong></a>
+            <a [routerLink]="['mentor/profile']"></a>
+            <a [routerLink]="['mentor/profile']" style="text-align: center;"><span class="btn btn-outline-info"
+                style="background-color: #17a2b8;color: #fff;">Keep shopping</span></a>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn" style="margin: auto;">
+        <div class="dropdown" style="float:left;">
+          <a class="btn btn-outline-info login-btn not-badge-btn dropbtn"><i class="far fa-bell"
+              style="font-size: 20px;"></i><span class="badge badge-pill badge-danger not-badge"
+              style="font-size: 10px;">9</span></a>
+          <div class="dropdown-content">
+            <a [routerLink]="['mentor/profile']" class="pull-left"><strong>Notifications</strong></a>
+            <a [routerLink]="['mentor/profile']"></a>
+            <a [routerLink]="['mentor/profile']" style="text-align: center;">No notifications.</a>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item" *ngIf="!isLoggedIn">
+        <a [routerLink]="['auth/login']" class="btn btn-outline-info login-btn">Log in</a>
+      </li>
+      <li class="nav-item" *ngIf="!isLoggedIn">
+        <a [routerLink]="['auth/signup']" class="btn btn-outline-warning signup-btn">Sign up</a>
+      </li>
+      <li class="nav-item user-icon" *ngIf="isLoggedIn">
+        <div class="dropdown" style="float:left;">
+          <button class="dropbtn"><img class="user-avatar"
+              src="https://scontent.fbom26-1.fna.fbcdn.net/v/t1.0-1/c0.8.240.240a/p240x240/72726566_2433032706793550_7724302762627825664_o.jpg?_nc_cat=104&_nc_sid=dbb9e7&_nc_ohc=xNSPwgN26IwAX9BU4jP&_nc_ht=scontent.fbom26-1.fna&oh=0c4c7e0ec44b204c2e88bb636d951798&oe=5F1A2F0F">
+          </button>
+          <div class="dropdown-content">
+            <div style="text-align: center;">
+              <a [routerLink]="['mentor/profile']">
+                <img class="user-avatar" style="width: 80px; text-align: center;  margin: auto;"
+                  src="https://scontent.fbom26-1.fna.fbcdn.net/v/t1.0-1/c0.8.240.240a/p240x240/72726566_2433032706793550_7724302762627825664_o.jpg?_nc_cat=104&_nc_sid=dbb9e7&_nc_ohc=xNSPwgN26IwAX9BU4jP&_nc_ht=scontent.fbom26-1.fna&oh=0c4c7e0ec44b204c2e88bb636d951798&oe=5F1A2F0F">
+              </a>
+            </div>
+            <div style="text-align: center;">
+              <strong> dsjadhav92@gmail.com</strong>
+            </div>
+            <hr class="line-hr">
+            <a [routerLink]="['mentor/trainings']">My trainings</a>
+            <a [routerLink]="['mentor/cart']">My cart</a>
+            <hr class="line-hr">
+            <a [routerLink]="['mentor/notifications']">Notifications</a>
+            <a [routerLink]="['mentor/account-settings']">Account settings</a>
+            <a [routerLink]="['mentor/payment-methods']">Payment methods</a>
+            <a [routerLink]="['mentor/purchase-history']">Purchase history</a>
+            <hr class="line-hr">
+            <a [routerLink]="['mentor/edit-profile']">Edit profile</a>
+            <a [routerLink]="['mentor/public-profile']">Public profile</a>
+            <hr class="line-hr">
+            <a [routerLink]="['mentor/help']">Help</a>
+            <a (click)="doLogout()">Logout</a>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>

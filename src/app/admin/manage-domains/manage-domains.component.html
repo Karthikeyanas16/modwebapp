@@ -1,0 +1,46 @@
+<div>
+    <div class="col-md-12">
+        <p-table #dt  [value]="domains"  
+            [resizableColumns]="true" [scrollable]="true"  columnResizeMode="true"
+            [(selection)]="selectedUsers" dataKey="id" styleClass="ui-table-customers" [rowHover]="true"
+            [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading"
+            [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [filterDelay]="0" [globalFilterFields]="['domain','domain.domain','domain.status','status']">
+        <ng-template pTemplate="caption">
+            <h4> <strong> MANAGE DOMAINS/CATEGORIES</strong>  </h4>
+            <div class="ui-table-globalfilter-container">
+                <input  pInputText class="form-control" type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"  placeholder="Search domain" />
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 50px !important;">Id</th>
+                <th style="width: 250px !important;">Domain</th>
+                <th style="width: 250px !important;">Description</th>
+                <th style="width: 100px !important;">Status</th>
+                <th style="width: 100px !important;">Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-domain>
+            <tr>
+                <td style="width: 50px !important;">{{domain.id}}</td>
+                <td style="width: 250px !important;">{{domain.domain}}</td>
+                <td style="width: 250px !important;">{{domain.description}}</td>
+                <td style="width: 100px !important;"><span [ngClass]="domain.status ? 'badge badge-success' : 'badge badge-danger'">{{domain.status ? 'Active' : 'Inactive'}}</span></td>
+                <td style="width: 100px !important;cursor: pointer;" (click)="onClick(domain);"><span><i class="fas fa-edit mr-3"></i></span><span><i class="fas fa-trash-alt"></i>         </span></td>
+            </tr>
+        </ng-template>
+        </p-table>
+    </div>
+</div>
+<p-dialog header="Update Status" [(visible)]="displayModal"  [transitionOptions]="'0ms'" [modal]="true"  [baseZIndex]="10000"
+    [draggable]="false" [resizable]="true">
+    <div class="ui-helper-clearfix" style="height: 125px; width: 200px;margin-top: 10px;">
+        <label>Status</label>
+        <p-dropdown [options]="userStatus" [(ngModel)]="selectedStatus" [filter]="false"></p-dropdown>
+    </div>
+        <p-footer>
+            <button type="button" class="btn btn-primary " (click)="displayModal=false" >Yes</button>
+            <button type="button" class="btn btn-danger" (click)="displayModal=false"  >No</button>
+        </p-footer>
+</p-dialog>
