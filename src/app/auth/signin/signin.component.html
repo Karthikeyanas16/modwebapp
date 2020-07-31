@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col-md-4 offset-md-4 mt-3">
+    <div class="h4">
+      <img src="../../assets/logo/mod-logo.png" width="50" height="50" class="d-inline-block img-thumbnail" alt="logo">
+      Log In !
+      <hr class="line-hr">
+    </div>
+    <div *ngIf="msgStatus.status" [ngClass]=" msgStatus.type ? 'lead alert alert-success': 'lead alert alert-danger'"
+      role="alert">
+      {{msgStatus.message}}
+    </div>
+    <form (ngSubmit)="login()" [formGroup]="form">
+      <div class="form-group ">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" formControlName="email"
+          aria-describedby="emailHelp" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        <span *ngIf="!form.get('email').valid && form.get('email').touched" class="help-block">
+          <span class="error-msg" *ngIf="form.get('email').errors['pattern']">This email is invalid!</span>
+          <span class="error-msg" *ngIf="form.get('email').errors['required']">This field is required!</span>
+        </span>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password"
+          placeholder="Enter Password">
+
+        <span *ngIf="!form.get('password').valid && form.get('password').touched" class="help-block">
+          <span class="error-msg"
+            *ngIf="!form.get('password').errors['minLength'] && !form.get('password').errors['required']">This password
+            is invalid!</span>
+          <span class="error-msg" *ngIf="form.get('password').errors['required']">This field is required!</span>
+        </span>
+      </div>
+
+      <button type="submit" [disabled]="!form.valid"
+        class="btn btn-outline-primary btn-lg btn-block font-weight-bold">Log
+        In</button>
+      <div class="loginbox text-center mt-3">
+        or
+        <a class="sign-link" [routerLink]="['/auth/forgotpass']" data-purpose="login-link-signup-popup">
+          Forgot Password
+        </a>
+      </div>
+      <hr class="line-hr">
+      <div class="loginbox-footer">
+        Don't have an account?
+        <a class="sign-link" [routerLink]="['/auth/signup']" data-purpose="login-link-signup-popup">
+          Sign up
+        </a>
+      </div>
+    </form>
+  </div>
+</div>

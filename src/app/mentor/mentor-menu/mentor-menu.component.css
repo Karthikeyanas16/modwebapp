@@ -1,0 +1,9 @@
+.jumbotron-header{
+    padding: 25px 0;
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    background-color: #29303b;
+    color: #fff;
+    text-align: center;
+}

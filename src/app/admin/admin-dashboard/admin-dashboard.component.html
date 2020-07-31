@@ -1,0 +1,8 @@
+<div class="row">
+    <div class="col-md-12">
+        <div *ngIf="msgStatus.status"
+            [ngClass]=" msgStatus.type ? 'lead alert alert-success': 'lead alert alert-danger'" role="alert">
+            {{msgStatus.message}}
+        </div>
+    </div>
+</div>

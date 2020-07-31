@@ -1,0 +1,12 @@
+<div class="d-flex justify-content-center" [class.hidden]="!show">
+  <div class="spinner-grow text-primary" role="status" *ngIf="show"
+    style="display:table;margin-top: 15%; max-width:400px; max-height: 200px; position:fixed;background:#4c87ed;z-index:9999;">
+    <div style="display:table-cell; vertical-align:middle;">
+      <div class="Double_Circle">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div [class.hidden]="!show" class="ui-widget-overlay ui-dialog-mask" style="z-index: 11000;"></div>

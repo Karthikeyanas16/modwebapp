@@ -1,0 +1,64 @@
+<div class="row">
+  <div class="col-md-4 offset-md-4 mt-3">
+    <div class="h4"><img src="../../assets/logo/mod-logo.png" width="50" height="50"
+        class="d-inline-block img-thumbnail" alt="logo">
+      Sign Up !
+      <hr class="line-hr">
+    </div>
+    <div *ngIf="msgStatus.status" [ngClass]=" msgStatus.type ? 'lead alert alert-success': 'lead alert alert-danger'"
+      role="alert">
+      {{msgStatus.message}}
+    </div>
+    <section>
+      <form (ngSubmit)="signUp()" [formGroup]="form">
+        <div class="form-group ">
+          <label for="exampleInputEmail1">Email address <span class="required">*</span></label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            placeholder="Enter email" formControlName="email">
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          <span *ngIf="!form.get('email').valid && form.get('email').touched" class="help-block">
+            <span class="error-msg" *ngIf="form.get('email').errors['pattern']">This email is invalid!</span>
+            <span class="error-msg" *ngIf="form.get('email').errors['required']">This field is required!</span>
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password <span class="required">*</span></label>
+          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
+            formControlName="password">
+          <span *ngIf="!form.get('password').valid && form.get('password').touched" class="help-block">
+            <span class="error-msg"
+              *ngIf="!form.get('password').errors['minLength'] && !form.get('password').errors['required']">This
+              password
+              is invalid!</span>
+            <span class="error-msg" *ngIf="form.get('password').errors['required']">This field is required!</span>
+          </span>
+        </div>
+        <!-- <hr style="background-color: #f93308;"> -->
+        <div class="form-group">
+          <label for="exampleInputPassword2">Account Type <span class="required">*</span></label>
+          <div class="form-group">
+            <label class="radio-inline" style="margin:5px;">
+              <input type="radio" name="optradio" checked> Student
+            </label>
+            <label class="radio-inline" style="margin:5px;">
+              <input type="radio" name="optradio"> Trainer
+            </label>
+          </div>
+        </div>
+        <button type="submit" [disabled]="!form.valid"
+          class="btn btn-outline-primary btn-lg btn-block font-weight-bold">Sign Up</button>
+        <div class="priv-link-wrapper">
+          By signing up, you agree to our
+          <a [routerLink]="['/terms']" class="priv-link" target="_blank"> Terms & conditions</a>
+        </div>
+        <hr class="line-hr">
+        <div class="loginbox-footer">
+          Already have an account?
+          <a class="sign-link" [routerLink]="['/auth/login']" data-purpose="login-link-signup-popup">
+            Log In
+          </a>
+        </div>
+      </form>
+    </section>
+  </div>
+</div>
