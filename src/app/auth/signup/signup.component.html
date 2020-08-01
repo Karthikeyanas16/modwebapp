@@ -50,7 +50,7 @@
               Student
             </label>
             <label class=" radio-inline" style="margin:5px;">
-              <input type="radio" name="accountType" value="trainer" formControlName="accountType"
+              <input type="radio" name="accountType" value="trainer" formControlName="role"
                 (change)="changeAccType($event.target.value)">
               Trainer
             </label>
@@ -59,7 +59,7 @@
         <div class="form-group" *ngIf="isTrainer">
           <label for="tech">Technology<span class="required">*</span></label>
           <div class="form-group">
-            <select class="form-control" formControlName="selectedTech" name="tech" id="tech">
+            <select class="form-control" formControlName="technology" name="tech" id="tech">
               <option value="" disabled selected>Choose technology</option>
               <option *ngFor="let tech of techList" [ngValue]="tech" (change)="changeTechnology($event.target.value)">
                 {{tech}}
