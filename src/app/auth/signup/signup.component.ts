@@ -27,15 +27,15 @@ export class SignupComponent implements OnInit {
       password: ['', [
         Validators.required,
         Validators.minLength(8)]],
-      accountType: ['student', [
+      role: ['student', [
         Validators.required]],
-      selectedTech: ['', [Validators.required]]
+      technology: ['', [Validators.required]]
     });
     this.selectTechValidators();
   }
   selectTechValidators() {
-    const accountType = this.form.get('accountType');
-    const selectedTech = this.form.get('selectedTech');
+    const accountType = this.form.get('role');
+    const selectedTech = this.form.get('technology');
     if (accountType.value === 'trainer') {
       selectedTech.setValidators(Validators.required);
     } else {
@@ -50,8 +50,8 @@ export class SignupComponent implements OnInit {
         this.form.value.name,
         this.form.value.email,
         this.form.value.password,
-        this.form.value.accountType,
-        this.form.value.selectedTech
+        this.form.value.role,
+        this.form.value.technology
       );
       this.authService.createUser(reqBody).subscribe(res => {
         this.msgStatus.status = true;
@@ -83,12 +83,12 @@ export class SignupComponent implements OnInit {
     this.selectTechValidators();
   }
   changeTechnology(selected) {
-    this.form.value.selectedTech.setValue(selected, {
+    this.form.value.technology.setValue(selected, {
       onlySelf: true
     });
   }
 }
 export class User {
   // tslint:disable-next-line:max-line-length
-  constructor(public name: string, public email: string, public password: string, public accountType: string, public selectedTech: string) { }
+  constructor(public name: string, public email: string, public password: string, public role: string, public technology: string) { }
 }

@@ -34,7 +34,7 @@ export class AuthService {
 
 
   createUser(reqBody): Observable<any> {
-    const url: any = `${environment.url}/register`;
+    const url: any = `${environment.userService}/register`;
     return this.http.post(url, reqBody).pipe(
       map(response => {
         return response;
