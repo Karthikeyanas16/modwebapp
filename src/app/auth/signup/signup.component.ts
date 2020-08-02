@@ -32,6 +32,7 @@ export class SignupComponent implements OnInit {
       technology: ['', [Validators.required]]
     });
     this.selectTechValidators();
+    console.log(this.form.touched);
   }
   selectTechValidators() {
     const accountType = this.form.get('role');
