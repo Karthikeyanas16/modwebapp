@@ -45,12 +45,12 @@
           <label for="exampleInputPassword2">Account Type <span class="required">*</span></label>
           <div class="form-group">
             <label class="radio-inline" style="margin:5px;">
-              <input type="radio" name="accountType" value="student" formControlName="accountType" checked
+              <input type="radio" name="role" value="student" formControlName="role" checked
                 (change)="changeAccType($event.target.value)">
               Student
             </label>
             <label class=" radio-inline" style="margin:5px;">
-              <input type="radio" name="accountType" value="trainer" formControlName="role"
+              <input type="radio" name="role" value="trainer" formControlName="role"
                 (change)="changeAccType($event.target.value)">
               Trainer
             </label>
