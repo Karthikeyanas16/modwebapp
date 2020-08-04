@@ -15,10 +15,14 @@ export class SignupComponent implements OnInit {
   form: FormGroup;
   msgStatus = { status: false, type: true, message: '' };
   isTrainer: boolean;
-  techList: any = ['Java Full Stack', 'MEAN/MERN Stack', 'Python', 'C/C++'];
-  constructor(private fb: FormBuilder, private authService: AuthService, private route: Router) { }
+  // techList: any = ['Java Full Stack', 'MEAN/MERN Stack', 'Python', 'C/C++'];
+  techList: any = [];
+  constructor(private fb: FormBuilder, private authService: AuthService, private route: Router) {
+    this.getTechList();
+  }
 
   ngOnInit(): void {
+
     this.form = this.fb.group({
       name: ['', [Validators.required]],
       email: ['', [
@@ -86,6 +90,20 @@ export class SignupComponent implements OnInit {
   changeTechnology(selected) {
     this.form.value.technology.setValue(selected, {
       onlySelf: true
+    });
+  }
+  getTechList() {
+    this.authService.getTechList().subscribe(res => {
+      this.techList = res;
+    }, error => {
+      console.log('error', error);
+      let msg = 'Oops !! Something went wrong, please contact the administrator';
+      if (error.error.message) {
+        msg = error.error.message;
+      }
+      this.msgStatus.status = true;
+      this.msgStatus.message = msg;
+      this.msgStatus.type = false;
     });
   }
 }
