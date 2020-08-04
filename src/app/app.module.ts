@@ -15,6 +15,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { AuthGuard } from './auth/auth.guard';
 import { LoaderComponent } from './loader/loader.component';
+import { NewlinePipe } from './newLIne.pipe';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { LoaderComponent } from './loader/loader.component';
     HomeComponent,
     TermsComponent,
     NotfoundComponent,
-    LoaderComponent
+    LoaderComponent,
+    NewlinePipe
   ],
   imports: [
     BrowserModule,

@@ -5,7 +5,8 @@ const BASE_URL = 'http://localhost:8765';
 export const environment = {
   production: false,
   url: BASE_URL,
-  userService: BASE_URL + `/api/user`
+  userService: BASE_URL + `/api/user`,
+  searchCourses: BASE_URL + `/api/search`
 };
 
 /*
