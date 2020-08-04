@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
 
   playSound() {
     const sound: any = this.el.nativeElement.querySelector('#notifSound');
-    sound.play();
+    //sound.play();
   }
 
 }

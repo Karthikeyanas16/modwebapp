@@ -6,6 +6,12 @@
   <a class="navbar-brand" style="margin-left: auto !important" [routerLink]="['/']">
     <img src="../../assets/logo/mod-logo.png" width="60" height="60" class="d-inline-block" alt="logo">
   </a>
+  <div style="width:40%;border-radius: 45%;">
+    <div class="input-icons">
+      <i class="fa fa-search icon pull-right"></i>
+      <input class="form-control input-field" type="text" placeholder="Search anything...">
+    </div>
+  </div>
   <a class="nav-item  menu_btn" (click)="display = true" *ngIf="isLoggedIn">
     <img class="user-avatar"
       src="https://scontent.fbom26-1.fna.fbcdn.net/v/t1.0-1/c0.8.240.240a/p240x240/72726566_2433032706793550_7724302762627825664_o.jpg?_nc_cat=104&_nc_sid=dbb9e7&_nc_ohc=xNSPwgN26IwAX9BU4jP&_nc_ht=scontent.fbom26-1.fna&oh=0c4c7e0ec44b204c2e88bb636d951798&oe=5F1A2F0F">

@@ -41,6 +41,14 @@ export class AuthService {
       })
     );
   }
+  getTechList(): Observable<any> {
+    const url: any = `${environment.searchCourses}/courses/search/technology`;
+    return this.http.get(url).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
 
   loginUser(reqBody): Observable<any> {
     return this.http
