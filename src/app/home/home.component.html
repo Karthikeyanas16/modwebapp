@@ -16,6 +16,7 @@
     </ul>
   </div>
 </div> -->
+
 <div class="row banner-img">
   <div class="col-md-4 col-sm-12 offset-md-4">
     <div class="card ">
@@ -36,57 +37,25 @@
 </div>
 <div class="row">
   <div class="col-md-10 col-sm-12 offset-md-1">
-    <div class="card-group">
-      <div class="card card-list" >
-        <img class="card-img-top" src="https://via.placeholder.com/350x150" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-      </div>
-      <div class="card card-list">
-        <img class="card-img-top" src="https://via.placeholder.com/350x150" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-      </div>
-      <div class="card card-list">
-        <img class="card-img-top" src="https://via.placeholder.com/350x150" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-      </div>
+    <div *ngIf="msgStatus.status" class="mt-5"
+      [ngClass]=" msgStatus.type ? 'lead alert alert-success': 'lead alert alert-danger'" role="alert">
+      {{msgStatus.message}}
     </div>
-    <div class="card-group">
-      <div class="card card-list" >
-        <img class="card-img-top" src="https://via.placeholder.com/350x150" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-      </div>
-      <div class="card card-list">
-        <img class="card-img-top" src="https://via.placeholder.com/350x150" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-      </div>
-      <div class="card card-list">
-        <img class="card-img-top" src="https://via.placeholder.com/350x150" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    <div class="row">
+      <div class="col-sm-3" *ngFor="let course of courseList">
+        <div class="card card-list" (mouseleave)="playSound()">
+          <div class="card-body">
+            <h5 class="card-title">{{course.technology | uppercase}}</h5>
+            <div class="card-title">{{course.name}}
+              <span class="blockquote-footer">By :<cite title="Source Title"> {{course.mentor}}</cite>
+              </span>
+            </div>
+            <p class="card-text">{{course.description | newline}}</p>
+            <a href="#" class="btn btn-primary">Enroll</a>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+  <audio id="notifSound" src="assets/audio/beep.mp3" type="audio/mp3">
+  </audio>
