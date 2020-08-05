@@ -13,8 +13,38 @@ export class AdminService {
     constructor(private http: HttpClient, private route: Router) { }
 
     welcome(): Observable<any> {
-        const url: any = `${environment.url}/greeting`;
+        const url: any = `${environment.adminServices}/dashboard`;
         return this.http.get(url, { responseType: 'text' }).pipe(
+            map(response => {
+                console.log('response', response);
+                return response;
+            })
+        );
+    }
+
+    getTechnology(): Observable<any> {
+        const url: any = `${environment.adminServices}/courses`;
+        return this.http.get(url).pipe(
+            map(response => {
+                console.log('response', response);
+                return response;
+            })
+        );
+    }
+
+    getUsers(): Observable<any> {
+        const url: any = `${environment.adminServices}/users`;
+        return this.http.get(url).pipe(
+            map(response => {
+                console.log('response', response);
+                return response;
+            })
+        );
+    }
+
+    getMentors(): Observable<any> {
+        const url: any = `${environment.adminServices}/mentors`;
+        return this.http.get(url).pipe(
             map(response => {
                 console.log('response', response);
                 return response;

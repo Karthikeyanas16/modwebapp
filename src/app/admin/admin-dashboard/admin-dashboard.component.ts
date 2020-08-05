@@ -11,7 +11,7 @@ export class AdminDashboardComponent implements OnInit {
   constructor(private adminService: AdminService) { }
 
   ngOnInit(): void {
-    this.load();
+    // this.load();
   }
   load() {
     this.adminService.welcome().subscribe(res => {

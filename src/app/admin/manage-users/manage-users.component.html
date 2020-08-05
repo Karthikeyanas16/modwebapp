@@ -1,49 +1,50 @@
 <div>
-    <div class="col-md-12">
-        <p-table #dt  [value]="users"  
-            [resizableColumns]="true" [scrollable]="true"  columnResizeMode="true"
-            [(selection)]="selectedUsers" dataKey="id" styleClass="ui-table-customers" [rowHover]="true"
-            [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading"
-            [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-            [filterDelay]="0" [globalFilterFields]="['name','user.name','user.status','status']">
-        <ng-template pTemplate="caption">
-            <h4 > <strong> MANAGE USERS </strong>   </h4>
-            <div class="ui-table-globalfilter-container">
-                <input  pInputText class="form-control" type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"  placeholder="Search trainer" />
-            </div>
-        </ng-template>
-        <ng-template pTemplate="header">
-            <tr>
-                <th style="width: 50px !important;">Id</th>
-                <th style="width: 250px !important;">Name</th>
-                <th style="width: 250px !important;">Email</th>
-                <th style="width: 100px !important;">Mobile</th>
-                <th style="width: 100px !important;">Status</th>
-                <th style="width: 100px !important;">Action</th>
+    <div class="col-md-12" *ngIf="users.length">
+        <p-table #dt [value]="users" [resizableColumns]="true" [scrollable]="true" columnResizeMode="true"
+            [(selection)]="selectedUsers" dataKey="id" styleClass="ui-table-customers" [rowHover]="true" [rows]="10"
+            [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+            [globalFilterFields]="['name','user.name','user.status','status']">
+            <ng-template pTemplate="caption">
+                <h4> <strong> MANAGE USERS </strong> </h4>
+                <div class="ui-table-globalfilter-container">
+                    <input pInputText class="form-control" type="text"
+                        (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search trainer" />
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 50px !important;">Id</th>
+                    <th style="width: 250px !important;">Name</th>
+                    <th style="width: 250px !important;">Email</th>
+                    <th style="width: 100px !important;">Status</th>
+                    <th style="width: 100px !important;">Action</th>
 
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-user>
-            <tr>
-                <td style="width: 50px !important;">{{user.id}}</td>
-                <td style="width: 250px !important;">{{user.name}}</td>
-                <td style="width: 250px !important;">{{user.email}}</td>
-                <td style="width: 100px !important;">{{user.mobile}}</td>
-                <td style="width: 100px !important;"><span [ngClass]="user.status ? 'badge badge-success' : 'badge badge-danger'">{{user.status ? 'Active' : 'Inactive'}}</span></td>
-                <td style="width: 100px !important;cursor: pointer;" (click)="onClick(user);"><span><i class="fas fa-user-edit"></i></span></td>
-            </tr>
-        </ng-template>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-user>
+                <tr>
+                    <td style="width: 50px !important;">{{user.id}}</td>
+                    <td style="width: 250px !important;">{{user.name}}</td>
+                    <td style="width: 250px !important;">{{user.email}}</td>
+                    <td style="width: 100px !important;"><span
+                            [ngClass]="!user.status ? 'badge badge-success' : 'badge badge-danger'">{{!user.status ? 'Active' : 'Inactive'}}</span>
+                    </td>
+                    <td style="width: 100px !important;cursor: pointer;" (click)="onClick(user);"><span><i
+                                class="fas fa-user-edit"></i></span></td>
+                </tr>
+            </ng-template>
         </p-table>
     </div>
 </div>
-<p-dialog header="Update Status" [(visible)]="displayModal"  [transitionOptions]="'0ms'" [modal]="true"  [baseZIndex]="10000"
-    [draggable]="false" [resizable]="true">
+<p-dialog header="Update Status" [(visible)]="displayModal" [transitionOptions]="'0ms'" [modal]="true"
+    [baseZIndex]="10000" [draggable]="false" [resizable]="true">
     <div class="ui-helper-clearfix" style="height: 125px; width: 200px;margin-top: 10px;">
         <label>Status</label>
         <p-dropdown [options]="userStatus" [(ngModel)]="selectedStatus" [filter]="false"></p-dropdown>
     </div>
-        <p-footer>
-            <button type="button" class="btn btn-primary " (click)="displayModal=false" >Yes</button>
-            <button type="button" class="btn btn-danger" (click)="displayModal=false"  >No</button>
-        </p-footer>
+    <p-footer>
+        <button type="button" class="btn btn-primary " (click)="displayModal=false">Yes</button>
+        <button type="button" class="btn btn-danger" (click)="displayModal=false">No</button>
+    </p-footer>
 </p-dialog>

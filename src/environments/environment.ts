@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   url: BASE_URL,
   userService: BASE_URL + `/api/user`,
-  searchCourses: BASE_URL + `/api/search`
+  searchCourses: BASE_URL + `/api/search`,
+  adminServices: BASE_URL + `/api/admin`
 };
 
 /*

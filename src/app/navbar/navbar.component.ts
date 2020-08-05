@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { CourseService } from '../course.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,7 @@ export class NavbarComponent implements OnInit {
   authStatSubs: Subscription;
   isLoggedIn: boolean;
   msgStatus = { status: false, type: true, message: '' };
-  constructor(private courseService: CourseService, private authService: AuthService) {
+  constructor(private courseService: CourseService, private authService: AuthService, private route: Router) {
   }
 
   ngOnInit(): void {
@@ -24,7 +25,7 @@ export class NavbarComponent implements OnInit {
         this.isLoggedIn = isAuthenticated;
       });
     console.log(this.isLoggedIn);
-    // this.isLoggedIn = true;
+    this.isLoggedIn = true;
     // this.authService.userType = 'mentor';
   }
   doLogout() {
@@ -39,6 +40,7 @@ export class NavbarComponent implements OnInit {
     if (text) {
       this.courseService.searchCourse(text).subscribe(res => {
         console.log('res', res);
+        this.route.navigate(['/']);
       }, error => {
         console.log('error', error);
         let msg = 'Oops !! Something went wrong, please contact the administrator';
@@ -57,6 +59,7 @@ export class NavbarComponent implements OnInit {
   getCourseList() {
     this.courseService.geAllCourses().subscribe(res => {
       console.log('res', res);
+      this.route.navigate(['/']);
     }, error => {
       console.log('error', error);
       let msg = 'Oops !! Something went wrong, please contact the administrator';
