@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, HostListener } from '@angular/core';
 import { CourseService } from '../course.service';
 import { Subscription } from 'rxjs';
 
@@ -41,5 +41,12 @@ export class HomeComponent implements OnInit {
     const sound: any = this.el.nativeElement.querySelector('#notifSound');
     // sound.play();
   }
-
+  // @HostListener("window:scroll", [])
+  // onScroll(): void {
+  //   if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+  //     // Load Your Data Here
+  //     console.log('load data on scroll !!');
+  //     // this.getCourseList();
+  //   }
+  // }
 }

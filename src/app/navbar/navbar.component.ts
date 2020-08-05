@@ -30,6 +30,11 @@ export class NavbarComponent implements OnInit {
   doLogout() {
     this.authService.logout();
   }
+  searchEmpty(text: string) {
+    if (!text) {
+      this.getCourseList();
+    }
+  }
   search(text: string) {
     if (text) {
       this.courseService.searchCourse(text).subscribe(res => {
