@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminService } from '../admin.service';
 
 @Component({
   selector: 'app-manage-trainers',
@@ -7,25 +8,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManageTrainersComponent implements OnInit {
 
-  users :any = [];
-  selectedUsers:any
-  loading : boolean;
-  displayModal:boolean;
-  selectedStatus :boolean;
-  userStatus : any = [{'label' : 'Active' , value : true},{'label' : 'Inactive' , value : false}];
-   constructor() { }
- 
-   ngOnInit(): void {
-     this.users.push({'id':1,'name':'DJ','email':'dsjadhav92@gmail.com','mobile':'8600256227','status': true},
-     {'id':2,'name':'Swapnil','email':'swapnilgmail.com','mobile':'9220772661','status':true},
-     {'id':3,'name':'Sandip Wafare','email':'sandipw2@gmail.com','mobile':'9657265481','status':false},
-     {'id':4,'name':'Rohini Jadhav','email':'Rohini@gmail.com','mobile':'9220772668','status':true},
-     {'id':5,'name':'Amit Thorat','email':'amit@gmail.com','mobile':'9657276489','status':true},
-     );
-   }
- 
-   onClick(row:any){
-     this.displayModal =true;
-   }
+  users: any = [];
+  selectedUsers: any;
+  loading: boolean;
+  displayModal: boolean;
+  selectedStatus: boolean;
+  msgStatus = { status: false, type: true, message: '' };
+  userStatus: any = [{ label: 'Active', value: true }, { label: 'Inactive', value: false }];
+  constructor(private adminService: AdminService) { }
+
+  ngOnInit(): void {
+    this.getMentors();
+  }
+
+  onClick(row: any) {
+    this.displayModal = true;
+  }
+
+  getMentors() {
+    this.adminService.getMentors().subscribe(res => {
+      this.users = res;
+    }, error => {
+      console.log('error', error);
+      let msg = 'Oops !! Something went wrong, please contact the administrator';
+      if (error.error.message) {
+        msg = error.error.message;
+      }
+      this.msgStatus.status = true;
+      this.msgStatus.message = msg;
+      this.msgStatus.type = false;
+    });
+  }
 
 }

@@ -10,6 +10,7 @@ import { ManagePaymentsComponent } from './manage-payments/manage-payments.compo
 import { ManageTrainersComponent } from './manage-trainers/manage-trainers.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AuthGuard } from '../auth/auth.guard';
+import { ComingSoonComponent } from './coming-soon/coming-soon.component';
 
 const routes: Routes = [{
   path: '',
@@ -22,7 +23,8 @@ const routes: Routes = [{
     { path: 'manage-payments', component: ManagePaymentsComponent, pathMatch: 'full' },
     { path: 'manage-domains', component: ManageDomainsComponent, pathMatch: 'full' },
     { path: 'technology', component: TechnologyComponent, pathMatch: 'full' },
-    { path: 'app-settings', component: AppSettingsComponent, pathMatch: 'full' }
+    { path: 'app-settings', component: AppSettingsComponent, pathMatch: 'full' },
+    { path: 'coming-soon', component: ComingSoonComponent },
   ]
 }
 ];

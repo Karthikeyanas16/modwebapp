@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {FormsModule } from '@angular/forms'
+import { FormsModule } from '@angular/forms'
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
@@ -12,22 +12,24 @@ import { ManagePaymentsComponent } from './manage-payments/manage-payments.compo
 import { AppSettingsComponent } from './app-settings/app-settings.component';
 import { AdminMenuComponent } from './admin-menu/admin-menu.component';
 
-import {TableModule} from 'primeng/table';
-import {DialogModule} from 'primeng/dialog';
-import {DropdownModule} from 'primeng/dropdown';
+import { TableModule } from 'primeng/table';
+import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { ComingSoonComponent } from './coming-soon/coming-soon.component';
 
 
 
 
 @NgModule({
   declarations: [AdminComponent,
-    ManageUsersComponent, 
-    ManageTrainersComponent, 
-    ManageDomainsComponent, 
-    TechnologyComponent, 
-    ManagePaymentsComponent, 
-    AppSettingsComponent, AdminMenuComponent, AdminDashboardComponent],
+    ManageUsersComponent,
+    ManageTrainersComponent,
+    ManageDomainsComponent,
+    TechnologyComponent,
+    ManagePaymentsComponent,
+    AppSettingsComponent, AdminMenuComponent, AdminDashboardComponent, ComingSoonComponent
+  ],
   imports: [
     CommonModule,
     AdminRoutingModule,
