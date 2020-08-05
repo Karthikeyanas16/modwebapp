@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { CourseService } from '../course.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -9,11 +10,15 @@ import { CourseService } from '../course.service';
 export class HomeComponent implements OnInit {
   msgStatus = { status: false, type: true, message: '' };
   courseList: any = [];
+  searchSub: Subscription;
 
   constructor(private courseService: CourseService, public el: ElementRef) { }
 
   ngOnInit(): void {
     this.getCourseList();
+    this.searchSub = this.courseService.courses.subscribe((value) => {
+      this.courseList = value;
+    });
   }
 
   getCourseList() {
@@ -34,7 +39,7 @@ export class HomeComponent implements OnInit {
 
   playSound() {
     const sound: any = this.el.nativeElement.querySelector('#notifSound');
-    //sound.play();
+    // sound.play();
   }
 
 }

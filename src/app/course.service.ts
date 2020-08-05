@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
@@ -9,20 +9,25 @@ import { environment } from 'src/environments/environment';
     providedIn: 'root'
 })
 export class CourseService {
+    courses: Subject<any> = new Subject<any>();
     constructor(private http: HttpClient, private route: Router) { }
 
     geAllCourses(): Observable<any> {
         const url: any = `${environment.searchCourses}/courses`;
         return this.http.get(url).pipe(
             map(response => {
+                this.courses.next(response);
                 return response;
             })
         );
     }
-    searchCourse(): Observable<any> {
-        const url: any = `${environment.searchCourses}/mentorTechnology/{text}`;
+    searchCourse(text: string): Observable<any> {
+        const url: any = `${environment.searchCourses}/mentorTechnology/` + text;
         return this.http.get(url).pipe(
             map(response => {
+                if (response) {
+                    this.courses.next(response);
+                }
                 return response;
             })
         );
