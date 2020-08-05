@@ -31,7 +31,7 @@ export class SignupComponent implements OnInit {
       password: ['', [
         Validators.required,
         Validators.minLength(8)]],
-      role: ['student', [
+      role: ['user', [
         Validators.required]],
       technology: ['', [Validators.required]]
     });
@@ -41,7 +41,7 @@ export class SignupComponent implements OnInit {
   selectTechValidators() {
     const accountType = this.form.get('role');
     const selectedTech = this.form.get('technology');
-    if (accountType.value === 'trainer') {
+    if (accountType.value === 'mentor') {
       selectedTech.setValidators(Validators.required);
     } else {
       selectedTech.setValidators(null);
@@ -84,7 +84,7 @@ export class SignupComponent implements OnInit {
     }, 5000);
   }
   changeAccType(type: string) {
-    type === 'trainer' ? this.isTrainer = true : this.isTrainer = false;
+    type === 'mentor' ? this.isTrainer = true : this.isTrainer = false;
     this.selectTechValidators();
   }
   changeTechnology(selected) {

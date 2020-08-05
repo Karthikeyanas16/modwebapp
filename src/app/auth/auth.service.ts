@@ -42,7 +42,7 @@ export class AuthService {
     );
   }
   getTechList(): Observable<any> {
-    const url: any = `${environment.searchCourses}/courses/search/technology`;
+    const url: any = `${environment.searchCourses}/technology`;
     return this.http.get(url).pipe(
       map(response => {
         return response;
