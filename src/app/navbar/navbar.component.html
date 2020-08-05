@@ -8,8 +8,9 @@
   </a>
   <div style="width:40%;border-radius: 45%;">
     <div class="input-icons">
-      <i class="fa fa-search icon pull-right"></i>
-      <input class="form-control input-field" type="text" placeholder="Search Mentor OR Technology...">
+      <i class="fa fa-search icon pull-right" (click)="search(text.value)"></i>
+      <input class="form-control input-field" type="text" placeholder="Search Mentor OR Technology..." #text
+        (keyup.enter)="search(text.value)" (keyup)="searchEmpty(text.value)">
     </div>
   </div>
   <a class="nav-item  menu_btn" (click)="display = true" *ngIf="isLoggedIn">
