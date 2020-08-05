@@ -19,5 +19,13 @@ export class CourseService {
             })
         );
     }
+    searchCourse(): Observable<any> {
+        const url: any = `${environment.searchCourses}/mentorTechnology/{text}`;
+        return this.http.get(url).pipe(
+            map(response => {
+                return response;
+            })
+        );
+    }
 
 }

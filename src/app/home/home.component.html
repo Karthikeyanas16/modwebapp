@@ -44,10 +44,12 @@
     <div class="row">
       <div class="col-sm-3" *ngFor="let course of courseList">
         <div class="card card-list" (mouseleave)="playSound()">
+          <span class="badge badge-warning" style="float: right;width: fit-content;">₹ {{course.fees}}</span>
           <div class="card-body">
+
             <h5 class="card-title">{{course.technology | uppercase}}</h5>
-            <div class="card-title">{{course.name}}
-              <span class="blockquote-footer">By :<cite title="Source Title"> {{course.mentor}}</cite>
+            <div class="card-title">
+              <span class="blockquote-footer">By :<cite title="Source Title"> {{course.name}}</cite>
               </span>
             </div>
             <p class="card-text">{{course.description | newline}}</p>
