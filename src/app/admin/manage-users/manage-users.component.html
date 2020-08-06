@@ -7,10 +7,15 @@
             [globalFilterFields]="['name','user.name','user.status','status']">
             <ng-template pTemplate="caption">
                 <h4> <strong> MANAGE USERS </strong> </h4>
+                <div *ngIf="msgStatus.status" class="mt-5"
+                    [ngClass]=" msgStatus.type ? 'lead alert alert-success': 'lead alert alert-danger'" role="alert">
+                    {{msgStatus.message}}
+                </div>
                 <div class="ui-table-globalfilter-container">
                     <input pInputText class="form-control" type="text"
                         (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search trainer" />
                 </div>
+
             </ng-template>
             <ng-template pTemplate="header">
                 <tr>
@@ -30,8 +35,9 @@
                     <td style="width: 100px !important;"><span
                             [ngClass]="!user.status ? 'badge badge-success' : 'badge badge-danger'">{{!user.status ? 'Active' : 'Inactive'}}</span>
                     </td>
-                    <td style="width: 100px !important;cursor: pointer;" (click)="onClick(user);"><span><i
-                                class="fas fa-user-edit"></i></span></td>
+                    <td style="width: 100px !important;cursor: pointer;"><span (click)="onEdit(user.id);"><i
+                                class="fas fa-user-edit mr-3"></i></span>
+                        <span (click)="onDelete(user.id);"><i class="fas fa-trash-alt"></i> </span></td>
                 </tr>
             </ng-template>
         </p-table>
@@ -46,5 +52,15 @@
     <p-footer>
         <button type="button" class="btn btn-primary " (click)="displayModal=false">Yes</button>
         <button type="button" class="btn btn-danger" (click)="displayModal=false">No</button>
+    </p-footer>
+</p-dialog>
+<p-dialog header="Delete User" [(visible)]="displayDelete" [transitionOptions]="'0ms'" [modal]="true"
+    [baseZIndex]="10000" [draggable]="false" [resizable]="true">
+    <div class="ui-helper-clearfix" style="height: auto; width:auto;">
+        <label>Are you sure you want to delete this user?</label>
+    </div>
+    <p-footer>
+        <button type="button" class="btn btn-primary " (click)="delete()">Yes</button>
+        <button type="button" class="btn btn-danger" (click)="cancel()">No</button>
     </p-footer>
 </p-dialog>

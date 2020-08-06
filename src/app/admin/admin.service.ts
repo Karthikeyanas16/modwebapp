@@ -51,4 +51,22 @@ export class AdminService {
             })
         );
     }
+
+    deleteUser(id: string): Observable<any> {
+        const url: any = `${environment.adminServices}/user/delete/` + id;
+        return this.http.get(url).pipe(
+            map(response => {
+                return response;
+            })
+        );
+    }
+
+    deleteTechnology(id: string): Observable<any> {
+        const url: any = `${environment.adminServices}/course/delete/` + id;
+        return this.http.get(url).pipe(
+            map(response => {
+                return response;
+            })
+        );
+    }
 }
