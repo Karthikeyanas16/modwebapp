@@ -47,7 +47,7 @@
   </p-sidebar>
   <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
     <ul class="navbar-nav">
-      <ng-container *ngIf="isLoggedIn">
+      <ng-container *ngIf="isLoggedIn && auth.role !='admin'">
         <li class="nav-item" style="text-align: center;">
           <a class="nav-link" href="#">Current Trainings</a>
         </li>
@@ -66,17 +66,34 @@
             </div>
           </div>
         </li>
+      </ng-container>
+      <ng-container *ngIf="isLoggedIn && auth.role =='admin'">
+        <li class="nav-item" style="text-align: center;">
+          <a class="nav-link" href="#">Students Enrollment</a>
+        </li>
+        <li class="nav-item" style="text-align: center;">
+          <a class="nav-link" href="#">Technologies</a>
+        </li>
+        <li class="nav-item" style="text-align: center;">
+          <a class="nav-link" href="#">Mentors</a>
+        </li>
+        <li class="nav-item" style="text-align: center;">
+          <a class="nav-link" href="#">Proposals</a>
+        </li>
+        <li class="nav-item" style="text-align: center;">
+          <a class="nav-link" href="#">Feedback</a>
+        </li>
         <li class="nav-item" style="text-align: center;">
           <div class="dropdown nav-link">
-            <button class="dropbtn">Skills</button>
+            <button class="dropbtn">Payments</button>
             <div class="dropdown-content sub-content">
-              <a href="#">Add Skills</a>
-              <a href="#">Edit Skills</a>
+              <a href="#">View History</a>
+              <a href="#">Withdraw</a>
             </div>
           </div>
         </li>
       </ng-container>
-      <li class="nav-item" *ngIf="isLoggedIn" style="margin: auto;">
+      <li class="nav-item" *ngIf="isLoggedIn && auth.role !='admin'" style="margin: auto;">
         <div class="dropdown">
           <a class="btn btn-outline-info login-btn not-badge-btn dropbtn"><i class="fas fa-shopping-bag"
               style="font-size: 20px;"></i></a>
@@ -106,19 +123,20 @@
       <li class="nav-item" *ngIf="!isLoggedIn">
         <a [routerLink]="['auth/signup']" class="btn btn-outline-warning signup-btn">Sign up</a>
       </li>
-      <li class="nav-item user-icon" *ngIf="isLoggedIn" style="margin-top:5px;">
+      <li class="nav-item user-icon user-avatar" *ngIf="isLoggedIn">
         <div class="dropdown" style="float:left;">
           <button class="dropbtn">
-            <i class="fa fa-user" aria-hidden="true"></i>
+            <!-- <i class="fa fa-user" aria-hidden="true" style="margin:5px;"></i> -->
+            <span style="margin:3px;"><strong>{{titleCaseWord(auth.name)}}</strong></span>
           </button>
           <div class="dropdown-content">
             <div style="text-align: center;">
               <a [routerLink]="['mentor/profile']">
-                <i class="fa fa-user" aria-hidden="true"></i>
+                <i class="fa fa-user" aria-hidden="true" style="margin:5px;"></i>
               </a>
             </div>
             <div style="text-align: center;">
-              <strong> dsjadhav92@gmail.com</strong>
+              <strong> {{auth.name}}</strong>
             </div>
             <hr class="line-hr">
             <a [routerLink]="['mentor/trainings']">My trainings</a>
@@ -126,13 +144,12 @@
             <hr class="line-hr">
             <a [routerLink]="['mentor/notifications']">Notifications</a>
             <a [routerLink]="['mentor/account-settings']">Account settings</a>
-            <a [routerLink]="['mentor/payment-methods']">Payment methods</a>
+            <!-- <a [routerLink]="['mentor/payment-methods']">Payment methods</a> -->
             <a [routerLink]="['mentor/purchase-history']">Purchase history</a>
             <hr class="line-hr">
-            <a [routerLink]="['mentor/edit-profile']">Edit profile</a>
-            <a [routerLink]="['mentor/public-profile']">Public profile</a>
-            <hr class="line-hr">
-            <a [routerLink]="['mentor/help']">Help</a>
+            <!-- <a [routerLink]="['mentor/edit-profile']">Edit profile</a>
+            <a [routerLink]="['mentor/public-profile']">Public profile</a> 
+            <hr class="line-hr">-->
             <a (click)="doLogout()">Logout</a>
           </div>
         </div>
