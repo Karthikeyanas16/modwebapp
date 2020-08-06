@@ -52,16 +52,17 @@ export class AuthService {
 
   loginUser(reqBody): Observable<any> {
     return this.http
-      .post<{ token }>(
-        `${environment.url}/authenticate`,
+      .post(
+        `${environment.userService}/authenticate`,
         reqBody
       )
       .pipe(
         map(response => {
-          const token = response.token;
+          const token = 'eyJpc3MiOiJ0b3B0YWwuY29tIiwiZXhwIjoxNDI2NDIwODAwLCJodHRwOi8vdG9wdGFsLmNvbS9qd3RfY2xhaW1zL2lzX2FkbWluIjp0cnVlLCJjb21wYW55IjoiVG9wdGFsIiwiYXdlc29tZSI6dHJ1ZX0'; // response.token;
           this.token = token;
           if (token) {
-            localStorage.setItem('token', JSON.parse(JSON.stringify(response.token)));
+            localStorage.setItem('token', JSON.parse(JSON.stringify(token)));
+            localStorage.setItem('authUser', JSON.stringify(response));
             // const expiresInDuration = response.data.expiresIn;
             // this.setAuthTimer(expiresInDuration);
             this.authStatusListener.next(true);
@@ -94,5 +95,17 @@ export class AuthService {
       loggedIn = false;
     }
     return loggedIn;
+  }
+  getAuthUser() {
+    return JSON.parse(localStorage.getItem('authUser'));
+  }
+  navigateUser() {
+    if (this.getAuthUser().role === 'admin') {
+      this.route.navigate(['/admin']);
+    } else if (this.getAuthUser().role === 'mentor') {
+      this.route.navigate(['/mentor']);
+    } else if (this.getAuthUser().role === 'user') {
+      this.route.navigate(['/user']);
+    }
   }
 }

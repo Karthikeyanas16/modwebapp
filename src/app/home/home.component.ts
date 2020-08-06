@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, HostListener } from '@angular/core';
 import { CourseService } from '../course.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -12,9 +13,10 @@ export class HomeComponent implements OnInit {
   courseList: any = [];
   searchSub: Subscription;
 
-  constructor(private courseService: CourseService, public el: ElementRef) { }
+  constructor(private courseService: CourseService, public el: ElementRef, private authService: AuthService) { }
 
   ngOnInit(): void {
+    // this.authService.navigateUser();
     this.getCourseList();
     this.searchSub = this.courseService.courses.subscribe((value) => {
       this.courseList = value;
