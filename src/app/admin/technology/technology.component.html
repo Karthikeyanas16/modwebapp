@@ -6,7 +6,14 @@
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
             [globalFilterFields]="['technology','technology.technology','technology.status','status']">
             <ng-template pTemplate="caption">
-                <h4> <strong> MANAGE TECHNOLOGIES</strong> </h4>
+                <div class="h4"><strong> MANAGE TECHNOLOGIES</strong>
+                    <a class=""><i class="fas fa-plus-circle"></i>
+                    </a>
+                </div>
+                <div *ngIf="msgStatus.status" class="mt-5"
+                    [ngClass]=" msgStatus.type ? 'lead alert alert-success': 'lead alert alert-danger'" role="alert">
+                    {{msgStatus.message}}
+                </div>
                 <div class="ui-table-globalfilter-container">
                     <input pInputText class="form-control" type="text"
                         (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search technology" />
@@ -31,8 +38,9 @@
                     <td style="width: 100px !important;"><span
                             [ngClass]="technology.status ? 'badge badge-success' : 'badge badge-danger'">{{technology.status ? 'Active' : 'Inactive'}}</span>
                     </td>
-                    <td style="width: 100px !important;cursor: pointer;" (click)="onClick(technology);"><span><i
-                                class="fas fa-edit mr-3"></i></span><span><i class="fas fa-trash-alt"></i> </span></td>
+                    <td style="width: 100px !important;cursor: pointer;"><span (click)="onEdit(technology.id);"><i
+                                class="fas fa-user-edit mr-3"></i></span>
+                        <span (click)="onDelete(technology.id);"><i class="fas fa-trash-alt"></i> </span></td>
                 </tr>
             </ng-template>
         </p-table>
@@ -47,5 +55,15 @@
     <p-footer>
         <button type="button" class="btn btn-primary " (click)="displayModal=false">Yes</button>
         <button type="button" class="btn btn-danger" (click)="displayModal=false">No</button>
+    </p-footer>
+</p-dialog>
+<p-dialog header="Delete User" [(visible)]="displayDelete" [transitionOptions]="'0ms'" [modal]="true"
+    [baseZIndex]="10000" [draggable]="false" [resizable]="true">
+    <div class="ui-helper-clearfix" style="height: auto; width:auto;">
+        <label>Are you sure you want to delete this user?</label>
+    </div>
+    <p-footer>
+        <button type="button" class="btn btn-primary " (click)="delete()">Yes</button>
+        <button type="button" class="btn btn-danger" (click)="cancel()">No</button>
     </p-footer>
 </p-dialog>
