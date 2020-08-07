@@ -14,10 +14,13 @@ export class HomeComponent implements OnInit {
   courseList: any = [];
   searchSub: Subscription;
   displayAlert: boolean;
+  isLoggedIn: boolean;
 
-  constructor(private courseService: CourseService, public el: ElementRef, private authService: AuthService, private route: Router) { }
+  constructor(private courseService: CourseService, public el: ElementRef, private authService: AuthService, private route: Router) {
+  }
 
   ngOnInit(): void {
+    this.isLoggedIn = this.authService.getIsAuth();
     this.getCourseList();
     this.searchSub = this.courseService.courses.subscribe((value) => {
       this.courseList = value;
@@ -26,7 +29,6 @@ export class HomeComponent implements OnInit {
 
   getCourseList() {
     this.courseService.geAllCourses().subscribe(res => {
-      console.log('res', res);
       this.courseList = res;
     }, error => {
       console.log('error', error);
@@ -40,7 +42,7 @@ export class HomeComponent implements OnInit {
     });
   }
   enroll(course: any) {
-    if (this.authService.getIsAuth()) {
+    if (this.isLoggedIn) {
       this.displayAlert = false;
     } else {
       this.displayAlert = true;
@@ -48,5 +50,8 @@ export class HomeComponent implements OnInit {
   }
   login() {
     this.route.navigate(['/auth/login']);
+  }
+  goToDashboard() {
+    this.authService.navigateUser();
   }
 }

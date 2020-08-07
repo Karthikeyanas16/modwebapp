@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-user',
@@ -7,11 +8,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
+  isLoggedIn: boolean;
 
-  constructor(private route: Router) { }
+  constructor(private route: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.isLoggedIn = this.authService.getIsAuth();
     this.route.navigate(['user/dashboard']);
+  }
+  goToDashboard() {
+    this.authService.navigateUser();
   }
 
 }

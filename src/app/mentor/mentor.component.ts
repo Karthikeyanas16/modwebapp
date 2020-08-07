@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-mentor',
@@ -7,11 +8,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./mentor.component.css']
 })
 export class MentorComponent implements OnInit {
+  isLoggedIn: any;
 
-  constructor(private route: Router) { }
+  constructor(private route: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.isLoggedIn = this.authService.getIsAuth();
     this.route.navigate(['mentor/dashboard']);
   }
-
+  goToDashboard() {
+    this.authService.navigateUser();
+  }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CourseService } from 'src/app/course.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -11,9 +12,11 @@ export class UserDashboardComponent implements OnInit {
   msgStatus = { status: false, type: true, message: '' };
   courseList: any = [];
   searchSub: Subscription;
-  constructor(private courseService: CourseService) { }
+  isLoggedIn: any;
+  constructor(private courseService: CourseService, private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.isLoggedIn = this.authService.getIsAuth();
     this.getCourseList();
     this.searchSub = this.courseService.courses.subscribe((value) => {
       this.courseList = value;
@@ -35,5 +38,7 @@ export class UserDashboardComponent implements OnInit {
       this.msgStatus.type = false;
     });
   }
-
+  goToDashboard() {
+    this.authService.navigateUser();
+  }
 }

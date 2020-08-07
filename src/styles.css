@@ -110,3 +110,39 @@
 .name-label{
     font-size: 14px;
 }
+.fixedButton {
+    position: fixed;
+    color: #fff;
+    font-family: sans-serif;
+    font-weight: 600;
+    padding: 15px;
+    cursor: pointer;
+    border: 1px solid;
+    border-bottom-right-radius: 30px;
+    border-top-right-radius: 30px;
+    background: #e33c17;
+    width: 116px;
+}
+.fixedButton:hover {
+    background-color: #e33c17;
+    color: white;
+  }
+
+  .fixedButton-dashboard {
+    position: fixed;
+    color: #fff;
+    font-family: sans-serif;
+    font-weight: 600;
+    padding: 15px;
+    cursor: pointer;
+    border: 1px solid;
+    border-bottom-right-radius: 30px;
+    border-top-right-radius: 30px;
+    background: #e33c17;
+    width: 110px;
+    margin-top: 72px;
+}
+.fixedButton-dashboard:hover {
+    background-color: #e33c17;
+    color: white;
+  }

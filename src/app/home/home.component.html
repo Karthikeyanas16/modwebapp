@@ -1,41 +1,5 @@
-<!-- <div class="row" style="background-color: whitesmoke !important;">
-  <div class="col-12" >
-    <ul class="nav">
-      <li class="nav-item">
-        <a class="nav-link active" href="#">Active</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul>
-  </div>
-</div> -->
-
-<!-- <div class="row banner-img">
-  <div class="col-md-4 col-sm-12 offset-md-4">
-    <div class="card ">
-      <div class="card-body">
-        <h5 class="card-title">Search your mentor here</h5>
-        <form>
-          <div class="form-group">
-            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter Technology">
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter Time slot">
-          </div>
-          <a href="#" class="btn btn-primary">Search</a>
-        </form>
-      </div>
-    </div>
-  </div>
-</div> -->
 <div class="row">
+  <div class="fixedButton" *ngIf="isLoggedIn" (click)="goToDashboard()">Dashboard</div>
   <div class="col-md-10 col-sm-12 offset-md-1">
     <div *ngIf="msgStatus.status" class="mt-5"
       [ngClass]=" msgStatus.type ? 'lead alert alert-success': 'lead alert alert-danger'" role="alert">

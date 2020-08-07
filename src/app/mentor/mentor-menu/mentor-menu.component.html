@@ -1,5 +1,5 @@
 <div class="topnav menu-divider">
-    <a class="topnav-link active" href="#home">Dashboard</a>
+    <a class="topnav-link active" [routerLink]="['/user/dashboard']">{{ auth.name | uppercase}} | {{ auth.email }}</a>
     <a class="topnav-link" href="#news">Current Trainings</a>
     <a class="topnav-link">Completed Trainings</a>
     <a class="topnav-link">Payments</a>

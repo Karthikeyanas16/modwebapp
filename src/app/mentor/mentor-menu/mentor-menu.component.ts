@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-mentor-menu',
@@ -6,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mentor-menu.component.css']
 })
 export class MentorMenuComponent implements OnInit {
-  constructor() { }
+  auth: any;
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    if (this.authService.getAuthUser()) {
+      this.auth = this.authService.getAuthUser();
+    }
   }
 
 }
