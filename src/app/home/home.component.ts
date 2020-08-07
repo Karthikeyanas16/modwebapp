@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
     });
   }
   enroll(course: any) {
-    if (this.isLoggedIn) {
+    if (this.authService.getIsAuth()) {
       this.displayAlert = false;
     } else {
       this.displayAlert = true;
