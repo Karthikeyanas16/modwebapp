@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, HostListener } from '@angular/core';
 import { CourseService } from '../course.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -12,11 +13,14 @@ export class HomeComponent implements OnInit {
   msgStatus = { status: false, type: true, message: '' };
   courseList: any = [];
   searchSub: Subscription;
+  displayAlert: boolean;
+  isLoggedIn: boolean;
 
-  constructor(private courseService: CourseService, public el: ElementRef, private authService: AuthService) { }
+  constructor(private courseService: CourseService, public el: ElementRef, private authService: AuthService, private route: Router) {
+  }
 
   ngOnInit(): void {
-    // this.authService.navigateUser();
+    this.isLoggedIn = this.authService.getIsAuth();
     this.getCourseList();
     this.searchSub = this.courseService.courses.subscribe((value) => {
       this.courseList = value;
@@ -25,7 +29,6 @@ export class HomeComponent implements OnInit {
 
   getCourseList() {
     this.courseService.geAllCourses().subscribe(res => {
-      console.log('res', res);
       this.courseList = res;
     }, error => {
       console.log('error', error);
@@ -38,17 +41,17 @@ export class HomeComponent implements OnInit {
       this.msgStatus.type = false;
     });
   }
-
-  playSound() {
-    const sound: any = this.el.nativeElement.querySelector('#notifSound');
-    // sound.play();
+  enroll(course: any) {
+    if (this.isLoggedIn) {
+      this.displayAlert = false;
+    } else {
+      this.displayAlert = true;
+    }
   }
-  // @HostListener("window:scroll", [])
-  // onScroll(): void {
-  //   if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-  //     // Load Your Data Here
-  //     console.log('load data on scroll !!');
-  //     // this.getCourseList();
-  //   }
-  // }
+  login() {
+    this.route.navigate(['/auth/login']);
+  }
+  goToDashboard() {
+    this.authService.navigateUser();
+  }
 }

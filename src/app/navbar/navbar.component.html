@@ -67,26 +67,26 @@
       </ng-container>
       <ng-container *ngIf="isLoggedIn && auth.role =='admin'">
         <li class="nav-item" style="text-align: center;">
-          <a class="nav-link" href="#">Students Enrollment</a>
+          <a class="nav-link" [routerLink]="['admin/manage-users']">Students Enrollment</a>
         </li>
         <li class="nav-item" style="text-align: center;">
-          <a class="nav-link" href="#">Technologies</a>
+          <a class="nav-link" [routerLink]="['admin/technology']">Technologies</a>
         </li>
         <li class="nav-item" style="text-align: center;">
-          <a class="nav-link" href="#">Mentors</a>
+          <a class="nav-link" [routerLink]="['admin/manage-trainers']">Mentors</a>
         </li>
         <li class="nav-item" style="text-align: center;">
-          <a class="nav-link" href="#">Proposals</a>
+          <a class="nav-link" [routerLink]="['admin/coming-soon']">Proposals</a>
         </li>
         <li class="nav-item" style="text-align: center;">
-          <a class="nav-link" href="#">Feedback</a>
+          <a class="nav-link" [routerLink]="['admin/coming-soon']">Feedback</a>
         </li>
         <li class="nav-item" style="text-align: center;">
           <div class="dropdown nav-link">
             <button class="dropbtn">Payments</button>
             <div class="dropdown-content sub-content">
-              <a href="#">View History</a>
-              <a href="#">Withdraw</a>
+              <a [routerLink]="['admin/coming-soon']">View History</a>
+              <a [routerLink]="['admin/coming-soon']">Withdraw</a>
             </div>
           </div>
         </li>
@@ -137,13 +137,12 @@
               <strong> {{auth.name}}</strong>
             </div>
             <hr class="line-hr">
-            <a [routerLink]="['mentor/trainings']">My trainings</a>
-            <a [routerLink]="['mentor/cart']">My cart</a>
+            <a [routerLink]="['admin/coming-soon']">My trainings</a>
             <hr class="line-hr">
-            <a [routerLink]="['mentor/notifications']">Notifications</a>
-            <a [routerLink]="['mentor/account-settings']">Account settings</a>
+            <a [routerLink]="['admin/coming-soon']">Notifications</a>
+            <a [routerLink]="['admin/coming-soon']">Account settings</a>
             <!-- <a [routerLink]="['mentor/payment-methods']">Payment methods</a> -->
-            <a [routerLink]="['mentor/purchase-history']">Purchase history</a>
+            <a [routerLink]="['admin/coming-soon']">Purchase history</a>
             <hr class="line-hr">
             <!-- <a [routerLink]="['mentor/edit-profile']">Edit profile</a>
             <a [routerLink]="['mentor/public-profile']">Public profile</a> 
