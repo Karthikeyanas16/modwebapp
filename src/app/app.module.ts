@@ -16,7 +16,7 @@ import { AuthInterceptor } from './auth/auth-interceptor';
 import { AuthGuard } from './auth/auth.guard';
 import { LoaderComponent } from './loader/loader.component';
 import { NewlinePipe } from './newLIne.pipe';
-
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,8 @@ import { NewlinePipe } from './newLIne.pipe';
     FormsModule,
     BrowserAnimationsModule,
     SidebarModule,
-    HttpClientModule
+    HttpClientModule,
+    DialogModule
   ],
   providers: [{ provide: APP_BASE_HREF, useValue: '/' },
   { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

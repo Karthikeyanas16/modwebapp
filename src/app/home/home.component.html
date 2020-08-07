@@ -43,7 +43,7 @@
     </div>
     <div class="row">
       <div class="col-sm-3" *ngFor="let course of courseList">
-        <div class="card card-list" (mouseleave)="playSound()">
+        <div class="card card-list">
           <span class="badge badge-warning" style="float: right;width: fit-content;">₹ {{course.fees}}</span>
           <div class="card-body">
 
@@ -53,11 +53,18 @@
               </span>
             </div>
             <p class="card-text">{{course.description | newline}}</p>
-            <a href="#" class="btn btn-primary">Enroll</a>
+            <a href="#" class="btn btn-primary" (click)="enroll(course)">Enroll</a>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <audio id="notifSound" src="assets/audio/beep.mp3" type="audio/mp3">
-  </audio>
+  <p-dialog header="Alert" [(visible)]="displayAlert" [transitionOptions]="'0ms'" [modal]="true" [baseZIndex]="10000"
+    [draggable]="false" [resizable]="true">
+    <div class="ui-helper-clearfix" style="height: auto; width:auto;">
+      <label>Not logged in, please log in to continue</label>
+    </div>
+    <p-footer>
+      <button type="button" class="btn btn-primary " (click)="login()">Continue</button>
+    </p-footer>
+  </p-dialog>
