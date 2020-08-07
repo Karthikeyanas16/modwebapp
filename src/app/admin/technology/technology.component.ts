@@ -12,11 +12,11 @@ export class TechnologyComponent implements OnInit {
   loading: boolean;
   displayModal: boolean;
   selectedStatus: boolean;
-  msgStatus = { status: false, type: true, message: '' };
-  userStatus: any = [{ label: 'Active', value: true }, { label: 'Inactive', value: false }];
+  msgStatus = { status: false, type: true, message: '', popup: false };
   displayDelete: boolean;
   selectedRowId: any;
-  technology: any = { name: '', email: '', status: '0' };
+  technology: any = { id: '', technology: '', description: '', status: '', fees: '' };
+  label = '';
   constructor(private adminService: AdminService) { }
 
   ngOnInit(): void {
@@ -26,6 +26,16 @@ export class TechnologyComponent implements OnInit {
   onEdit(row: any) {
     console.log(row);
     this.displayModal = true;
+    this.label = 'Add';
+    this.technology = { id: '', technology: '', description: '', status: 'Not Started', fees: '0' };
+    if (row) {
+      this.label = 'Edit';
+      this.technology.id = row.id;
+      this.technology.technology = row.technology;
+      this.technology.description = row.description;
+      this.technology.status = row.status;
+      this.technology.fees = row.fees;
+    }
   }
   onDelete(id: any) {
     this.displayDelete = true;
@@ -33,11 +43,12 @@ export class TechnologyComponent implements OnInit {
   }
   delete() {
     this.adminService.deleteTechnology(this.selectedRowId).subscribe(res => {
-      const msg = 'Record deleted successfully!';
+      const msg = 'Technology deleted successfully!';
       this.displayDelete = false;
       this.msgStatus.status = true;
       this.msgStatus.message = msg;
       this.msgStatus.type = true;
+      this.msgStatus.popup = true;
       this.getTechnology();
     }, error => {
       console.log('error', error);
@@ -48,18 +59,20 @@ export class TechnologyComponent implements OnInit {
       this.msgStatus.status = true;
       this.msgStatus.message = msg;
       this.msgStatus.type = false;
+      this.msgStatus.popup = true;
       this.displayDelete = false;
     });
+    setTimeout(() => {
+      this.msgStatus.status = false;
+    }, 3000);
   }
   cancel() {
     this.displayDelete = false;
   }
   getTechnology() {
     this.adminService.getTechnology().subscribe(res => {
-      console.log('res', res);
       this.technologies = res;
     }, error => {
-      console.log('error', error);
       let msg = 'Oops !! Something went wrong, please contact the administrator';
       if (error.error.message) {
         msg = error.error.message;
@@ -70,36 +83,33 @@ export class TechnologyComponent implements OnInit {
     });
   }
   update() {
-    //   if (this.form.valid) {
-    //     const reqBody = new User(
-    //       this.form.value.name,
-    //       this.form.value.email,
-    //       this.form.value.password,
-    //       this.form.value.role,
-    //       this.form.value.technology
-    //     );
-    //     this.adminService.updateUser(reqBody).subscribe(res => {
-    //       this.msgStatus.status = true;
-    //       this.msgStatus.message = 'User updated successfully!';
-    //       this.msgStatus.type = true;
-    //     }, error => {
-    //       console.log('error', error);
-    //       let msg = 'Oops !! Something went wrong, please contact the administrator';
-    //       if (error.error.message) {
-    //         msg = error.error.message;
-    //       }
-    //       this.msgStatus.status = true;
-    //       this.msgStatus.message = msg;
-    //       this.msgStatus.type = false;
-    //     });
+    if (this.technology.technology !== '' && this.technology.description !== '' && this.technology.status !== '' && this.technology.fees !== '') {
+      this.adminService.updateTechnology(this.technology).subscribe(res => {
+        this.msgStatus.status = true;
+        this.msgStatus.message = 'Technology updated successfully!';
+        this.msgStatus.type = true;
+        this.msgStatus.popup = true;
+        this.displayModal = false;
+        this.getTechnology();
+      }, error => {
+        let msg = 'Oops !! Something went wrong, please contact the administrator';
+        if (error.error.message) {
+          msg = error.error.message;
+        }
+        this.msgStatus.status = true;
+        this.msgStatus.message = msg;
+        this.msgStatus.type = false;
+        this.msgStatus.popup = true;
+      });
 
-    //   } else {
-    //     this.msgStatus.status = true;
-    //     this.msgStatus.message = 'Oops !! Something went wrong, please contact the administrator';
-    //     this.msgStatus.type = false;
-    //   }
-    //   setTimeout(() => {
-    //     this.msgStatus.status = false;
-    //   }, 5000);
+    } else {
+      this.msgStatus.status = true;
+      this.msgStatus.message = 'All fields are mandatory!';
+      this.msgStatus.type = false;
+      this.msgStatus.popup = true;
+    }
+    setTimeout(() => {
+      this.msgStatus.status = false;
+    }, 3000);
   }
 }

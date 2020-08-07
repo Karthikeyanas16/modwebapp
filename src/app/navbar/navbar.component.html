@@ -14,16 +14,14 @@
     </div>
   </div>
   <a class="nav-item  menu_btn" (click)="display = true" *ngIf="isLoggedIn">
-    <img class="user-avatar"
-      src="https://scontent.fbom26-1.fna.fbcdn.net/v/t1.0-1/c0.8.240.240a/p240x240/72726566_2433032706793550_7724302762627825664_o.jpg?_nc_cat=104&_nc_sid=dbb9e7&_nc_ohc=xNSPwgN26IwAX9BU4jP&_nc_ht=scontent.fbom26-1.fna&oh=0c4c7e0ec44b204c2e88bb636d951798&oe=5F1A2F0F">
+    <i class="fa fa-user" aria-hidden="true" style="margin:5px;"></i>
   </a>
   <p-sidebar [(visible)]="display" styleClass="ui-sidebar-sm" position="right">
     <ul class="list-group mt-3">
       <li class="list-group-item">
         <div style="text-align: center;">
           <a [routerLink]="['mentor/profile']">
-            <img class="user-avatar" style="width: 80px; text-align: center;  margin: auto;"
-              src="https://scontent.fbom26-1.fna.fbcdn.net/v/t1.0-1/c0.8.240.240a/p240x240/72726566_2433032706793550_7724302762627825664_o.jpg?_nc_cat=104&_nc_sid=dbb9e7&_nc_ohc=xNSPwgN26IwAX9BU4jP&_nc_ht=scontent.fbom26-1.fna&oh=0c4c7e0ec44b204c2e88bb636d951798&oe=5F1A2F0F">
+            <i class="fa fa-user" aria-hidden="true" style="margin:5px;"></i>
           </a>
         </div>
         <div style="text-align: center;">
@@ -109,7 +107,7 @@
         <div class="dropdown" style="float:left;">
           <a class="btn btn-outline-info login-btn not-badge-btn dropbtn"><i class="far fa-bell"
               style="font-size: 20px;"></i><span class="badge badge-pill badge-danger not-badge"
-              style="font-size: 10px;">9</span></a>
+              style="font-size: 10px;">0</span></a>
           <div class="dropdown-content">
             <a [routerLink]="['mentor/profile']" class="pull-left"><strong>Notifications</strong></a>
             <a [routerLink]="['mentor/profile']"></a>

@@ -13,11 +13,10 @@ export class ManageTrainersComponent implements OnInit {
   loading: boolean;
   displayModal: boolean;
   selectedStatus: boolean;
-  msgStatus = { status: false, type: true, message: '' };
-  userStatus: any = [{ label: 'Active', value: true }, { label: 'Inactive', value: false }];
+  msgStatus = { status: false, type: true, message: '', popup: false };
   displayDelete: boolean;
   selectedRowId: any;
-  user: any = { name: '', email: '', status: '0' };
+  user: any = { id: '', name: '', email: '', status: '0', role: '', technology_id: '' };
   constructor(private adminService: AdminService) { }
 
   ngOnInit(): void {
@@ -25,8 +24,15 @@ export class ManageTrainersComponent implements OnInit {
   }
   onEdit(row: any) {
     this.displayModal = true;
-    this.user.name = row.name;
-    this.user.status = row.status;
+    if (row) {
+      const status: string = row.status === 0 ? '0' : '1';
+      this.user.id = row.id;
+      this.user.name = row.name;
+      this.user.email = row.email;
+      this.user.status = status;
+      this.user.role = row.role;
+      this.user.technology_id = row.technology_id;
+    }
   }
   onDelete(id: any) {
     this.displayDelete = true;
@@ -34,11 +40,12 @@ export class ManageTrainersComponent implements OnInit {
   }
   delete() {
     this.adminService.deleteUser(this.selectedRowId).subscribe(res => {
-      const msg = 'Record deleted successfully!';
+      const msg = 'Mentor deleted successfully!';
       this.displayDelete = false;
       this.msgStatus.status = true;
       this.msgStatus.message = msg;
       this.msgStatus.type = true;
+      this.msgStatus.popup = true;
       this.getMentors();
     }, error => {
       console.log('error', error);
@@ -50,6 +57,7 @@ export class ManageTrainersComponent implements OnInit {
       this.msgStatus.message = msg;
       this.msgStatus.type = false;
       this.displayDelete = false;
+      this.msgStatus.popup = true;
     });
   }
   cancel() {
@@ -72,37 +80,34 @@ export class ManageTrainersComponent implements OnInit {
   }
 
   update() {
-    //   if (this.form.valid) {
-    //     const reqBody = new User(
-    //       this.form.value.name,
-    //       this.form.value.email,
-    //       this.form.value.password,
-    //       this.form.value.role,
-    //       this.form.value.technology
-    //     );
-    //     this.adminService.updateUser(reqBody).subscribe(res => {
-    //       this.msgStatus.status = true;
-    //       this.msgStatus.message = 'User updated successfully!';
-    //       this.msgStatus.type = true;
-    //     }, error => {
-    //       console.log('error', error);
-    //       let msg = 'Oops !! Something went wrong, please contact the administrator';
-    //       if (error.error.message) {
-    //         msg = error.error.message;
-    //       }
-    //       this.msgStatus.status = true;
-    //       this.msgStatus.message = msg;
-    //       this.msgStatus.type = false;
-    //     });
+    if (this.user.name !== '' && this.user.email !== '' && this.user.status !== '' && this.user.role !== '' && this.user.technology_id !== '') {
+      this.adminService.updateUser(this.user).subscribe(res => {
+        this.msgStatus.status = true;
+        this.msgStatus.message = 'Mentor updated successfully!';
+        this.msgStatus.type = true;
+        this.msgStatus.popup = true;
+        this.displayModal = false;
+        this.getMentors();
+      }, error => {
+        let msg = 'Oops !! Something went wrong, please contact the administrator';
+        if (error.error.message) {
+          msg = error.error.message;
+        }
+        this.msgStatus.status = true;
+        this.msgStatus.message = msg;
+        this.msgStatus.type = false;
+        this.msgStatus.popup = true;
+      });
 
-    //   } else {
-    //     this.msgStatus.status = true;
-    //     this.msgStatus.message = 'Oops !! Something went wrong, please contact the administrator';
-    //     this.msgStatus.type = false;
-    //   }
-    //   setTimeout(() => {
-    //     this.msgStatus.status = false;
-    //   }, 5000);
+    } else {
+      this.msgStatus.status = true;
+      this.msgStatus.message = 'All fields are mandatory!';
+      this.msgStatus.type = false;
+      this.msgStatus.popup = true;
+    }
+    setTimeout(() => {
+      this.msgStatus.status = false;
+    }, 3000);
   }
 
 }
