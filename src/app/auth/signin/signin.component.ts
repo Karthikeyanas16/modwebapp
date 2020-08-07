@@ -26,8 +26,8 @@ export class SigninComponent implements OnInit {
         Validators.required,
         Validators.pattern("[^ @]*@[^ @]*")]],
       password: ['', [
-        Validators.required,
-        Validators.minLength(8)]],
+        Validators.required]]
+        // Validators.minLength(8)]],
     });
   }
 

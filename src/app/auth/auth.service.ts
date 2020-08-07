@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -50,29 +50,51 @@ export class AuthService {
     );
   }
 
-  loginUser(reqBody): Observable<any> {
+  // loginUser(user: User): Observable<any> {
+  //   const headers = new HttpHeaders(
+  //     user ? {
+  //       authorization: 'Basic ' + btoa(user.email + ':' + user.password)
+  //     }:{}
+  //   );
+  //   return this.http.get<any>(`${environment.userService}/login`, + {headers: headers}).pipe(
+  //     map(response => {
+  //       if(response) {
+  //         localStorage.setItem('currentUser', JSON.stringify(response));
+  //         this.currentUserSubject.next(response);
+  //       }
+  //       return response;
+  //     })
+  //   );
+  // }
+
+  loginUser(user:User): Observable<any> {
+    const headers = new HttpHeaders(
+      user ? {
+        authorization: 'Basic ' + btoa(user.email + ':' + user.password)
+      }:{}
+    );
     return this.http
-      .post(
-        `${environment.userService}/authenticate`,
-        reqBody
+      .get(
+        `${environment.authServices}/service/user/login`
       )
       .pipe(
         map(response => {
-          const token = 'eyJpc3MiOiJ0b3B0YWwuY29tIiwiZXhwIjoxNDI2NDIwODAwLCJodHRwOi8vdG9wdGFsLmNvbS9qd3RfY2xhaW1zL2lzX2FkbWluIjp0cnVlLCJjb21wYW55IjoiVG9wdGFsIiwiYXdlc29tZSI6dHJ1ZX0'; // response.token;
-          this.token = token;
-          if (token) {
-            localStorage.setItem('token', JSON.parse(JSON.stringify(token)));
-            localStorage.setItem('authUser', JSON.stringify(response));
-            // const expiresInDuration = response.data.expiresIn;
-            // this.setAuthTimer(expiresInDuration);
-            this.authStatusListener.next(true);
-            // const now = new Date();
-            // const expirationDate = new Date(
-            //   now.getTime() + expiresInDuration * 1000
-            // );
-            // console.log(expirationDate);
-            // this.saveAuthData(token, expirationDate);
-          }
+          console.log(response);
+         // const token = 'eyJpc3MiOiJ0b3B0YWwuY29tIiwiZXhwIjoxNDI2NDIwODAwLCJodHRwOi8vdG9wdGFsLmNvbS9qd3RfY2xhaW1zL2lzX2FkbWluIjp0cnVlLCJjb21wYW55IjoiVG9wdGFsIiwiYXdlc29tZSI6dHJ1ZX0'; // response.token;
+         // this.token = response.token;
+          // if (token) {
+          //   localStorage.setItem('token', JSON.parse(JSON.stringify(token)));
+          //   localStorage.setItem('authUser', JSON.stringify(response));
+          //   // const expiresInDuration = response.data.expiresIn;
+          //   // this.setAuthTimer(expiresInDuration);
+          //   this.authStatusListener.next(true);
+          //   // const now = new Date();
+          //   // const expirationDate = new Date(
+          //   //   now.getTime() + expiresInDuration * 1000
+          //   // );
+          //   // console.log(expirationDate);
+          //   // this.saveAuthData(token, expirationDate);
+          // }
           return response;
         })
       );
@@ -108,4 +130,10 @@ export class AuthService {
       this.route.navigate(['/user']);
     }
   }
+}
+
+
+export class User {
+  email: string="";
+  password: string="";
 }
