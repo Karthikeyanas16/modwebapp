@@ -35,7 +35,7 @@
                     <td style="width: 100px !important;"><span
                             [ngClass]="!user.status ? 'badge badge-success' : 'badge badge-danger'">{{!user.status ? 'Active' : 'Inactive'}}</span>
                     </td>
-                    <td style="width: 100px !important;cursor: pointer;"><span (click)="onEdit(user.id);"><i
+                    <td style="width: 100px !important;cursor: pointer;"><span (click)="onEdit(user);"><i
                                 class="fas fa-user-edit mr-3"></i></span>
                         <span (click)="onDelete(user.id);"><i class="fas fa-trash-alt"></i> </span></td>
                 </tr>
@@ -43,15 +43,34 @@
         </p-table>
     </div>
 </div>
-<p-dialog header="Update Status" [(visible)]="displayModal" [transitionOptions]="'0ms'" [modal]="true"
+<p-dialog header="Update Mentor" [(visible)]="displayModal" [transitionOptions]="'0ms'" [modal]="true"
     [baseZIndex]="10000" [draggable]="false" [resizable]="true">
-    <div class="ui-helper-clearfix" style="height: 125px; width: 200px;margin-top: 10px;">
-        <label>Status</label>
-        <p-dropdown [options]="userStatus" [(ngModel)]="selectedStatus" [filter]="false"></p-dropdown>
+    <div class="ui-helper-clearfix" style="height: auto; width: 400px;margin-top: 10px;">
+        <div class="form-group ">
+            <label for="name">Name <span class="required">*</span></label>
+            <input type="text" class="form-control" id="name" placeholder="Enter name" [(ngModel)]="user.name">
+        </div>
+        <div class="form-group ">
+            <label for="exampleInputEmail1">Email address <span class="required">*</span></label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                placeholder="Enter email" [(ngModel)]="user.email">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword2">Status<span class="required">*</span></label>
+            <div class="form-group">
+                <label class="radio-inline" style="margin:5px;">
+                    <input type="radio" name="status" value="0" [(ngModel)]="user.status" checked>
+                    Active
+                </label>
+                <label class=" radio-inline" style="margin:5px;">
+                    <input type="radio" name="status" value="1" [(ngModel)]="user.status">
+                    InActive
+                </label>
+            </div>
+        </div>
     </div>
     <p-footer>
-        <button type="button" class="btn btn-primary " (click)="displayModal=false">Yes</button>
-        <button type="button" class="btn btn-danger" (click)="displayModal=false">No</button>
+        <button type="button" class="btn btn-primary " (click)="update()">Update</button>
     </p-footer>
 </p-dialog>
 <p-dialog header="Delete User" [(visible)]="displayDelete" [transitionOptions]="'0ms'" [modal]="true"
