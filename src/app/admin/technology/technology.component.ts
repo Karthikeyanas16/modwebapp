@@ -16,6 +16,7 @@ export class TechnologyComponent implements OnInit {
   userStatus: any = [{ label: 'Active', value: true }, { label: 'Inactive', value: false }];
   displayDelete: boolean;
   selectedRowId: any;
+  technology: any = { name: '', email: '', status: '0' };
   constructor(private adminService: AdminService) { }
 
   ngOnInit(): void {
@@ -23,6 +24,7 @@ export class TechnologyComponent implements OnInit {
   }
 
   onEdit(row: any) {
+    console.log(row);
     this.displayModal = true;
   }
   onDelete(id: any) {
@@ -66,5 +68,38 @@ export class TechnologyComponent implements OnInit {
       this.msgStatus.message = msg;
       this.msgStatus.type = false;
     });
+  }
+  update() {
+    //   if (this.form.valid) {
+    //     const reqBody = new User(
+    //       this.form.value.name,
+    //       this.form.value.email,
+    //       this.form.value.password,
+    //       this.form.value.role,
+    //       this.form.value.technology
+    //     );
+    //     this.adminService.updateUser(reqBody).subscribe(res => {
+    //       this.msgStatus.status = true;
+    //       this.msgStatus.message = 'User updated successfully!';
+    //       this.msgStatus.type = true;
+    //     }, error => {
+    //       console.log('error', error);
+    //       let msg = 'Oops !! Something went wrong, please contact the administrator';
+    //       if (error.error.message) {
+    //         msg = error.error.message;
+    //       }
+    //       this.msgStatus.status = true;
+    //       this.msgStatus.message = msg;
+    //       this.msgStatus.type = false;
+    //     });
+
+    //   } else {
+    //     this.msgStatus.status = true;
+    //     this.msgStatus.message = 'Oops !! Something went wrong, please contact the administrator';
+    //     this.msgStatus.type = false;
+    //   }
+    //   setTimeout(() => {
+    //     this.msgStatus.status = false;
+    //   }, 5000);
   }
 }

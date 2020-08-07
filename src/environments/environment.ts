@@ -8,7 +8,7 @@ export const environment = {
   userService: BASE_URL + `/api/user`,
   searchCourses: BASE_URL + `/api/search`,
   adminServices: BASE_URL + `/api/admin`,
-  authServices: BASE_URL + `/api/auth/service/user`
+  authServices: BASE_URL + `/api/auth`
 };
 
 /*

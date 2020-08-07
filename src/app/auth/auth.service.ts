@@ -50,54 +50,24 @@ export class AuthService {
     );
   }
 
-  // loginUser(user: User): Observable<any> {
-  //   const headers = new HttpHeaders(
-  //     user ? {
-  //       authorization: 'Basic ' + btoa(user.email + ':' + user.password)
-  //     }:{}
-  //   );
-  //   return this.http.get<any>(`${environment.userService}/login`, + {headers: headers}).pipe(
-  //     map(response => {
-  //       if(response) {
-  //         localStorage.setItem('currentUser', JSON.stringify(response));
-  //         this.currentUserSubject.next(response);
-  //       }
-  //       return response;
-  //     })
-  //   );
-  // }
-
-  loginUser(user:User): Observable<any> {
+  loginUser(user: User): Observable<any> {
     const headers = new HttpHeaders(
       user ? {
         authorization: 'Basic ' + btoa(user.email + ':' + user.password)
-      }:{}
+      } : {}
     );
-    return this.http
-      .get(
-        `${environment.authServices}/service/user/login`
-      )
-      .pipe(
-        map(response => {
-          console.log(response);
-         // const token = 'eyJpc3MiOiJ0b3B0YWwuY29tIiwiZXhwIjoxNDI2NDIwODAwLCJodHRwOi8vdG9wdGFsLmNvbS9qd3RfY2xhaW1zL2lzX2FkbWluIjp0cnVlLCJjb21wYW55IjoiVG9wdGFsIiwiYXdlc29tZSI6dHJ1ZX0'; // response.token;
-         // this.token = response.token;
-          // if (token) {
-          //   localStorage.setItem('token', JSON.parse(JSON.stringify(token)));
-          //   localStorage.setItem('authUser', JSON.stringify(response));
-          //   // const expiresInDuration = response.data.expiresIn;
-          //   // this.setAuthTimer(expiresInDuration);
-          //   this.authStatusListener.next(true);
-          //   // const now = new Date();
-          //   // const expirationDate = new Date(
-          //   //   now.getTime() + expiresInDuration * 1000
-          //   // );
-          //   // console.log(expirationDate);
-          //   // this.saveAuthData(token, expirationDate);
-          // }
-          return response;
-        })
-      );
+    const url: any = `${environment.authServices}/service/user/login`;
+    return this.http.get<any>(url, { headers }).pipe(
+      map(response => {
+        console.log(response);
+        if (response['token']) {
+          localStorage.setItem('token', JSON.parse(JSON.stringify(response['token'])));
+          localStorage.setItem('authUser', JSON.stringify(response));
+          this.authStatusListener.next(true);
+        }
+        return response;
+      })
+    );
   }
   private setAuthTimer(duration: number) {
     // console.log('Setting timer: ' + duration);
@@ -131,9 +101,7 @@ export class AuthService {
     }
   }
 }
-
-
 export class User {
-  email: string="";
-  password: string="";
+  email: string;
+  password: string;
 }
