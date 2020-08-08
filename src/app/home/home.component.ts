@@ -86,6 +86,7 @@ export class HomeComponent implements OnInit {
         this.msgStatus.status = true;
         this.msgStatus.message = msg;
         this.msgStatus.type = false;
+        this.msgStatus.popup = true;
       });
     }
   }

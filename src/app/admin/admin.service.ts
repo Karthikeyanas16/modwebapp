@@ -23,7 +23,7 @@ export class AdminService {
     }
 
     getTechnology(): Observable<any> {
-        const url: any = `${environment.adminService}/courses`;
+        const url: any = `${environment.searchService}/technology`;
         return this.http.get(url).pipe(
             map(response => {
                 console.log('response', response);
