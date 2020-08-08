@@ -24,7 +24,6 @@
                     <th style="width: 50px !important;">Id</th>
                     <th style="width: 100px !important;">Technology</th>
                     <th style="width: 250px !important;">Description</th>
-                    <th style="width: 100px !important;">Mentor</th>
                     <th style="width: 100px !important;">Fees</th>
                     <th style="width: 100px !important;">Status</th>
                     <th style="width: 100px !important;">Action</th>
@@ -35,7 +34,6 @@
                     <td style="width: 50px !important;">{{technology.id}}</td>
                     <td style="width: 100px !important;">{{technology.technology}}</td>
                     <td style="width: 250px !important;">{{technology.description}}</td>
-                    <td style="width: 100px !important;">{{technology.name}}</td>
                     <td style="width: 100px !important;">{{technology.fees}}</td>
                     <td style="width: 100px !important;"><span
                             [ngClass]="technology.status != 'Not Started' ? 'badge badge-success' : 'badge badge-danger'">{{technology.status == 'Not Started' ? 'Not Started' : 'Started'}}</span>

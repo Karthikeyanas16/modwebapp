@@ -39,6 +39,9 @@ export class TechnologyComponent implements OnInit {
   }
   onDelete(id: any) {
     this.displayDelete = true;
+    this.msgStatus.status = false;
+    this.msgStatus.message = '';
+    this.msgStatus.popup = false;
     this.selectedRowId = id;
   }
   delete() {

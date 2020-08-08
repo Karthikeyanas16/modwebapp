@@ -25,10 +25,10 @@
           </a>
         </div>
         <div style="text-align: center;">
-          <strong> dsjadhav92@gmail.com</strong>
+          <strong> auth.name | {{auth.email}}</strong>
         </div>
       </li>
-      <li class="list-group-item"> <a [routerLink]="['mentor/profile']">My trainings</a></li>
+      <!-- <li class="list-group-item"> <a [routerLink]="['mentor/profile']">My trainings</a></li>
       <li class="list-group-item"> <a [routerLink]="['mentor/profile']">My cart</a>
       </li>
       <li class="list-group-item"> <a [routerLink]="['mentor/profile']">Notifications</a></li>
@@ -39,7 +39,7 @@
       <li class="list-group-item"> <a [routerLink]="['mentor/profile']">Edit profile</a> </li>
       <li class="list-group-item"> <a [routerLink]="['mentor/public-profile']">Public profile</a>
       </li>
-      <li class="list-group-item"> <a [routerLink]="['mentor/profile']">Help</a></li>
+      <li class="list-group-item"> <a [routerLink]="['mentor/profile']">Help</a></li> -->
       <li class="list-group-item"> <a (click)="doLogout()">Logout</a></li>
     </ul>
   </p-sidebar>
@@ -55,7 +55,7 @@
         <li class="nav-item" style="text-align: center;">
           <a class="nav-link" href="#">Students Proposals</a>
         </li>
-        <li class="nav-item" style="text-align: center;">
+        <!-- <li class="nav-item" style="text-align: center;">
           <div class="dropdown nav-link">
             <button class="dropbtn">Payments</button>
             <div class="dropdown-content sub-content">
@@ -63,7 +63,7 @@
               <a href="#">Withdraw</a>
             </div>
           </div>
-        </li>
+        </li> -->
       </ng-container>
       <ng-container *ngIf="isLoggedIn && auth.role =='admin'">
         <li class="nav-item" style="text-align: center;">
@@ -81,7 +81,7 @@
         <li class="nav-item" style="text-align: center;">
           <a class="nav-link" [routerLink]="['admin/coming-soon']">Feedback</a>
         </li>
-        <li class="nav-item" style="text-align: center;">
+        <!-- <li class="nav-item" style="text-align: center;">
           <div class="dropdown nav-link">
             <button class="dropbtn">Payments</button>
             <div class="dropdown-content sub-content">
@@ -89,9 +89,9 @@
               <a [routerLink]="['admin/coming-soon']">Withdraw</a>
             </div>
           </div>
-        </li>
+        </li> -->
       </ng-container>
-      <li class="nav-item" *ngIf="isLoggedIn && auth.role !='admin'" style="margin: auto;">
+      <!-- <li class="nav-item" *ngIf="isLoggedIn && auth.role !='admin'" style="margin: auto;">
         <div class="dropdown">
           <a class="btn btn-outline-info login-btn not-badge-btn dropbtn"><i class="fas fa-shopping-bag"
               style="font-size: 20px;"></i></a>
@@ -102,7 +102,7 @@
                 style="background-color: #17a2b8;color: #fff;">Keep shopping</span></a>
           </div>
         </div>
-      </li>
+      </li> -->
       <li class="nav-item" *ngIf="isLoggedIn" style="margin: auto;">
         <div class="dropdown" style="float:left;">
           <a class="btn btn-outline-info login-btn not-badge-btn dropbtn"><i class="far fa-bell"
@@ -136,17 +136,18 @@
             <div style="text-align: center;">
               <strong> {{auth.name}}</strong>
             </div>
-            <hr class="line-hr">
+            <!-- <hr class="line-hr">
             <a [routerLink]="['admin/coming-soon']">My trainings</a>
             <hr class="line-hr">
             <a [routerLink]="['admin/coming-soon']">Notifications</a>
-            <a [routerLink]="['admin/coming-soon']">Account settings</a>
+            <a [routerLink]="['admin/coming-soon']">Account settings</a> -->
             <!-- <a [routerLink]="['mentor/payment-methods']">Payment methods</a> -->
-            <a [routerLink]="['admin/coming-soon']">Purchase history</a>
-            <hr class="line-hr">
+            <!-- <a [routerLink]="['admin/coming-soon']">Purchase history</a>
+            <hr class="line-hr"> -->
             <!-- <a [routerLink]="['mentor/edit-profile']">Edit profile</a>
             <a [routerLink]="['mentor/public-profile']">Public profile</a> 
-            <hr class="line-hr">-->
+            -->
+            <hr class="line-hr">
             <a (click)="doLogout()">Logout</a>
           </div>
         </div>
