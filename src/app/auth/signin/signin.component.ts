@@ -24,10 +24,10 @@ export class SigninComponent implements OnInit {
     this.form = this.fb.group({
       email: ['', [
         Validators.required,
-        Validators.pattern("[^ @]*@[^ @]*")]],
+        Validators.pattern('[^ @]*@[^ @]*')]],
       password: ['', [
-        Validators.required]]
-      // Validators.minLength(8)]],
+        Validators.required,
+        Validators.minLength(8)]]
     });
   }
 
@@ -43,7 +43,8 @@ export class SigninComponent implements OnInit {
           this.msgStatus.status = true;
           this.msgStatus.message = 'Login Successful !';
           this.msgStatus.type = true;
-          this.authService.navigateUser();
+          this.route.navigate(['/']);
+          // this.authService.navigateUser();
 
         },
         error => {

@@ -1,7 +1,7 @@
 <div class="row">
   <div class="fixedButton" *ngIf="isLoggedIn" (click)="goToDashboard()">Dashboard</div>
   <div class="col-md-10 col-sm-12 offset-md-1">
-    <div *ngIf="msgStatus.status" class="mt-5"
+    <div *ngIf="msgStatus.status && !msgStatus.popup" class="mt-5"
       [ngClass]=" msgStatus.type ? 'lead alert alert-success': 'lead alert alert-danger'" role="alert">
       {{msgStatus.message}}
     </div>
@@ -17,7 +17,8 @@
               </span>
             </div>
             <p class="card-text">{{course.description | newline}}</p>
-            <a href="#" class="btn btn-primary" (click)="enroll(course)">Enroll</a>
+            <button class="btn btn-primary" [disabled]="course.status=='Started'"
+              (click)="enroll(course)">Enroll</button>
           </div>
         </div>
       </div>
@@ -30,5 +31,46 @@
     </div>
     <p-footer>
       <button type="button" class="btn btn-primary " (click)="login()">Continue</button>
+    </p-footer>
+  </p-dialog>
+  <p-dialog header="Enroll | Send Proposal To Mentor" [(visible)]="displayEnroll" [transitionOptions]="'0ms'"
+    [modal]="true" [baseZIndex]="10000" [draggable]="false" [resizable]="true">
+    <div class="ui-helper-clearfix" style="height: auto; width: 450px;margin-top: 0px;">
+      <p class="lead" style="text-align: justify;">
+        <span class="badge badge-dark"> Course Title :</span>
+        <span>
+          {{courseEnroll.technology | uppercase}}</span>
+      </p>
+      <p class="lead " style="text-align: justify;">
+        <span class="badge badge-dark"> Course Description :</span>
+        <span>
+          {{courseEnroll.description | newline}}</span>
+      </p>
+      <p class="lead" style="text-align: justify;"><span class="badge badge-dark">Mentor
+          :</span><span> {{courseEnroll.name}}</span>
+      </p>
+      <p class="lead" style="text-align: justify;"><span class="badge badge-dark">Fess
+          :</span><span> ₹ {{courseEnroll.fees}}</span>
+      </p>
+      <hr class="line-hr">
+      <div class="form-group ">
+        <label for="description">Comments <span class="required"></span></label>
+        <textarea name="description" id="description" class="form-control" rows="2" placeholder="Enter comments"
+          [(ngModel)]="courseEnroll.comments"></textarea>
+      </div>
+      <div class="form-group ">
+        <label for="fees">Proposed Amount <span class="required">*</span></label>
+        <input type="number" min="0" class="form-control" id="fees" placeholder="Enter Fess"
+          [(ngModel)]="courseEnroll.proposalAmount">
+      </div>
+      <small id="" class="form-text text-muted">Note : Mentor will accept/reject your proposal within 24 hours after
+        sending this proposal, Please send proposal to continue, Thanks!</small>
+    </div>
+    <p-footer>
+      <div *ngIf="msgStatus.status && msgStatus.popup" style="max-width: 300px;"
+        [ngClass]=" msgStatus.type ? 'lead alert alert-success': 'lead alert alert-danger'" role="alert">
+        {{msgStatus.message}}
+      </div>
+      <button type="button" class="btn btn-primary " (click)="sendProposal()">Submit Proposal</button>
     </p-footer>
   </p-dialog>

@@ -42,7 +42,7 @@ export class AuthService {
     );
   }
   getTechList(): Observable<any> {
-    const url: any = `${environment.searchCourses}/technology`;
+    const url: any = `${environment.searchService}/technology`;
     return this.http.get(url).pipe(
       map(response => {
         return response;
@@ -56,7 +56,7 @@ export class AuthService {
         authorization: 'Basic ' + btoa(user.email + ':' + user.password)
       } : {}
     );
-    const url: any = `${environment.authServices}/service/user/login`;
+    const url: any = `${environment.authService}/service/user/login`;
     return this.http.get<any>(url, { headers }).pipe(
       map(response => {
         console.log(response);

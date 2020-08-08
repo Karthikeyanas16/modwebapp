@@ -13,7 +13,7 @@ export class AdminService {
     constructor(private http: HttpClient, private route: Router) { }
 
     welcome(): Observable<any> {
-        const url: any = `${environment.adminServices}/dashboard`;
+        const url: any = `${environment.adminService}/dashboard`;
         return this.http.get(url, { responseType: 'text' }).pipe(
             map(response => {
                 console.log('response', response);
@@ -23,7 +23,7 @@ export class AdminService {
     }
 
     getTechnology(): Observable<any> {
-        const url: any = `${environment.adminServices}/courses`;
+        const url: any = `${environment.adminService}/courses`;
         return this.http.get(url).pipe(
             map(response => {
                 console.log('response', response);
@@ -33,7 +33,7 @@ export class AdminService {
     }
 
     getUsers(): Observable<any> {
-        const url: any = `${environment.adminServices}/users`;
+        const url: any = `${environment.adminService}/users`;
         return this.http.get(url).pipe(
             map(response => {
                 console.log('response', response);
@@ -43,7 +43,7 @@ export class AdminService {
     }
 
     getMentors(): Observable<any> {
-        const url: any = `${environment.adminServices}/mentors`;
+        const url: any = `${environment.adminService}/mentors`;
         return this.http.get(url).pipe(
             map(response => {
                 console.log('response', response);
@@ -53,7 +53,7 @@ export class AdminService {
     }
 
     deleteUser(id: string): Observable<any> {
-        const url: any = `${environment.adminServices}/user/delete/` + id;
+        const url: any = `${environment.adminService}/user/delete/` + id;
         return this.http.get(url).pipe(
             map(response => {
                 return response;
@@ -62,7 +62,7 @@ export class AdminService {
     }
 
     deleteTechnology(id: string): Observable<any> {
-        const url: any = `${environment.adminServices}/course/delete/` + id;
+        const url: any = `${environment.adminService}/course/delete/` + id;
         return this.http.get(url).pipe(
             map(response => {
                 return response;
@@ -71,7 +71,7 @@ export class AdminService {
     }
 
     updateUser(reqBody): Observable<any> {
-        const url: any = `${environment.adminServices}/user/create`;
+        const url: any = `${environment.adminService}/user/create`;
         return this.http.post(url, reqBody).pipe(
             map(response => {
                 return response;
@@ -79,7 +79,7 @@ export class AdminService {
         );
     }
     updateTechnology(reqBody): Observable<any> {
-        const url: any = `${environment.adminServices}/course/create`;
+        const url: any = `${environment.adminService}/course/create`;
         return this.http.post(url, reqBody).pipe(
             map(response => {
                 return response;
