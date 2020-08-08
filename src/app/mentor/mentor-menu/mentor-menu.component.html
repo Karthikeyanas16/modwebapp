@@ -1,23 +1,7 @@
 <div class="topnav menu-divider">
-    <a class="topnav-link active" [routerLink]="['/user/dashboard']">{{ auth.name | uppercase}} | {{ auth.email }}</a>
-    <a class="topnav-link" href="#news">Current Trainings</a>
-    <a class="topnav-link">Completed Trainings</a>
-    <a class="topnav-link">Payments</a>
-
-    <a class="topnav-link">Technology</a>
-
-    <a class="topnav-link">Notifications</a>
-    <a class="topnav-link">Students Proposals</a>
-
-    <div class="topnav-right ">
-        <!-- <a href="#search">Profile</a> -->
-        <!-- <a href="#about">Logout</a> -->
-    </div>
-</div>
-
-<div class="jumbotron-header">
-    <!-- <div>
-        <h1 data-purpose="user-name">Dhondiram Jadhav</h1>
-        <h2></h2>
-    </div> -->
+    <a class="topnav-link active" [routerLink]="['/mentor/dashboard']">{{ auth.name | uppercase}} | {{ auth.email }}</a>
+    <a class="topnav-link" [routerLink]="['/mentor/dashboard']">Current Trainings</a>
+    <a class="topnav-link" [routerLink]="['/mentor/dashboard']">Completed Trainings</a>
+    <a class="topnav-link" [routerLink]="['/mentor/dashboard']">Technology</a>
+    <a class="topnav-link" [routerLink]="['/mentor/dashboard']">Students Proposals</a>
 </div>

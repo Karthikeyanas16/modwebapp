@@ -1,8 +1,8 @@
 <div class="topnav menu-divider">
     <a class="topnav-link active" [routerLink]="['/user/dashboard']">{{ auth.name | uppercase}} | {{ auth.email }}</a>
-    <a class="topnav-link" href="#news">Current Trainings</a>
-    <a class="topnav-link">Completed Trainings</a>
-    <a class="topnav-link">Proposal</a>
+    <a class="topnav-link" [routerLink]="['/user/dashboard']">Current Trainings</a>
+    <a class="topnav-link" [routerLink]="['/user/dashboard']">Completed Trainings</a>
+    <a class="topnav-link" [routerLink]="['/user/dashboard']">Student Proposal</a>
     <div class="topnav-right ">
         <!-- <a href="#search">Profile</a> -->
         <!-- <a href="#about">Logout</a> -->
