@@ -6,9 +6,10 @@ export const environment = {
   production: false,
   url: BASE_URL,
   userService: BASE_URL + `/api/user`,
-  searchCourses: BASE_URL + `/api/search`,
-  adminServices: BASE_URL + `/api/admin`,
-  authServices: BASE_URL + `/api/auth`
+  searchService: BASE_URL + `/api/search`,
+  adminService: BASE_URL + `/api/admin`,
+  authService: BASE_URL + `/api/auth`,
+  enrollmentService: BASE_URL + `/api/enrollment`
 };
 
 /*

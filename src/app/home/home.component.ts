@@ -10,12 +10,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  msgStatus = { status: false, type: true, message: '' };
+  msgStatus = { status: false, type: true, message: '', popup: false };
   courseList: any = [];
   searchSub: Subscription;
   displayAlert: boolean;
   isLoggedIn: boolean;
-
+  displayEnroll: boolean;
+  // tslint:disable-next-line:max-line-length
+  courseEnroll: any = { id: '', user_id: '', technology_id: '', technology: '', name: '', description: '', comments: '', fees: '', proposalAmount: '', proposalStatus: 'Not Started' };
   constructor(private courseService: CourseService, public el: ElementRef, private authService: AuthService, private route: Router) {
   }
 
@@ -44,8 +46,12 @@ export class HomeComponent implements OnInit {
   enroll(course: any) {
     if (this.authService.getIsAuth()) {
       this.displayAlert = false;
+      this.displayEnroll = true;
+      // tslint:disable-next-line:max-line-length
+      this.courseEnroll = { user_id: this.authService.getAuthUser().id, technology: course.technology, fees: course.fees, description: course.description, name: course.name, technology_id: course.id, comments: '', proposalAmount: course.fees, proposalStatus: 'Not Started' };
     } else {
       this.displayAlert = true;
+      this.displayEnroll = false;
     }
   }
   login() {
@@ -53,5 +59,34 @@ export class HomeComponent implements OnInit {
   }
   goToDashboard() {
     this.authService.navigateUser();
+  }
+  sendProposal() {
+    if (this.authService.getAuthUser().id && this.courseEnroll.technology_id && this.courseEnroll.proposalAmount) {
+      const reqBody: any = {
+        id: this.courseEnroll.technology_id,
+        user_id: this.authService.getAuthUser().id,
+        technology_id: this.courseEnroll.technology_id,
+        comments: this.courseEnroll.comments,
+        proposalAmount: this.courseEnroll.proposalAmount,
+        proposalStatus: 'Not Started'
+      };
+      this.courseService.courseEnroll(reqBody).subscribe(res => {
+        console.log(res);
+        this.msgStatus.status = true;
+        this.msgStatus.popup = true;
+        this.msgStatus.message = 'Proposal sent successfully.';
+        this.displayEnroll = false;
+        this.getCourseList();
+      }, error => {
+        console.log('error', error);
+        let msg = 'Oops !! Something went wrong, please contact the administrator';
+        if (error.error.message) {
+          msg = error.error.message;
+        }
+        this.msgStatus.status = true;
+        this.msgStatus.message = msg;
+        this.msgStatus.type = false;
+      });
+    }
   }
 }

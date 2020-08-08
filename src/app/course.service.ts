@@ -13,7 +13,7 @@ export class CourseService {
     constructor(private http: HttpClient, private route: Router) { }
 
     geAllCourses(): Observable<any> {
-        const url: any = `${environment.searchCourses}/courses`;
+        const url: any = `${environment.searchService}/courses`;
         return this.http.get(url).pipe(
             map(response => {
                 this.courses.next(response);
@@ -22,7 +22,7 @@ export class CourseService {
         );
     }
     searchCourse(text: string): Observable<any> {
-        const url: any = `${environment.searchCourses}/mentorTechnology/` + text;
+        const url: any = `${environment.searchService}/mentorTechnology/` + text;
         return this.http.get(url).pipe(
             map(response => {
                 if (response) {
@@ -32,5 +32,12 @@ export class CourseService {
             })
         );
     }
-
+    courseEnroll(reqBody): Observable<any> {
+        const url: any = `${environment.enrollmentService}/create`;
+        return this.http.post(url, reqBody).pipe(
+            map(response => {
+                return response;
+            })
+        );
+    }
 }
