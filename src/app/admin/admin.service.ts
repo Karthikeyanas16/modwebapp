@@ -86,4 +86,12 @@ export class AdminService {
             })
         );
     }
+    getProposals(): Observable<any> {
+        const url: any = `${environment.adminService}/enrollments`;
+        return this.http.get(url).pipe(
+            map(response => {
+                return response;
+            })
+        );
+    }
 }

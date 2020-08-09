@@ -39,6 +39,9 @@ export class ManageTrainersComponent implements OnInit {
     this.selectedRowId = id;
   }
   delete() {
+    this.msgStatus.status = false;
+    this.msgStatus.message = '';
+    this.msgStatus.popup = false;
     this.adminService.deleteUser(this.selectedRowId).subscribe(res => {
       const msg = 'Mentor deleted successfully!';
       this.displayDelete = false;

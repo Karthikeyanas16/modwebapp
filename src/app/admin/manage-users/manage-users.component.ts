@@ -38,6 +38,9 @@ export class ManageUsersComponent implements OnInit {
   onDelete(id: any) {
     this.displayDelete = true;
     this.selectedRowId = id;
+    this.msgStatus.status = false;
+    this.msgStatus.message = '';
+    this.msgStatus.popup = false;
   }
   delete() {
     this.adminService.deleteUser(this.selectedRowId).subscribe(res => {
