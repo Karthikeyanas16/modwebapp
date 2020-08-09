@@ -14,7 +14,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.getIsAuth();
-    this.route.navigate(['user/dashboard', 'Not Started']);
+    this.route.navigate(['user/dashboard', 'list']);
   }
   goToDashboard() {
     this.authService.navigateUser();

@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
     });
   }
   enroll(course: any) {
-    console.log(course)
+    //   console.log(course)
     this.msgStatus.status = false;
     this.msgStatus.message = '';
     this.msgStatus.popup = true;
@@ -75,7 +75,7 @@ export class HomeComponent implements OnInit {
         mentor_id: this.courseEnroll.mentor_id
       };
       this.courseService.courseEnroll(reqBody).subscribe(res => {
-        console.log(res);
+        // console.log(res);
         this.msgStatus.status = true;
         this.msgStatus.popup = true;
         this.msgStatus.message = 'Proposal sent successfully.';
