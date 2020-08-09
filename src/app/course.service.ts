@@ -25,6 +25,7 @@ export class CourseService {
             })
         );
     }
+
     geUserCourses(text): Observable<any> {
         // let url: any = `${environment.searchService}/courses`;
         const url: any = `${environment.enrollmentService}/search/` + this.authService.getAuthUser().id + `/` + text;
@@ -55,7 +56,7 @@ export class CourseService {
         );
     }
     getNotification(): Observable<any> {
-        const url: any = `${environment.notificationService}/notification/get/` + this.authService.getAuthUser().id;
+        const url: any = `${environment.notificationService}/notification/get/` + `${this.authService.getAuthUser().id}`;
         return this.http.get(url).pipe(
             map(response => {
                 this.courses.next(response);
