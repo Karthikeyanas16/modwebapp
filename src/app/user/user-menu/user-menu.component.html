@@ -1,5 +1,6 @@
 <div class="topnav menu-divider">
-    <a class="topnav-link active" [routerLink]="['/user/dashboard']">{{ auth.name | uppercase}} | {{ auth.email }}</a>
+    <a class="topnav-link active" [routerLink]="['/user/dashboard','Not Started']">{{ auth.name | uppercase}} |
+        {{ auth.email }}</a>
     <a class="topnav-link" [routerLink]="['/user/dashboard','In progress']">Current Trainings</a>
     <a class="topnav-link" [routerLink]="['/user/dashboard','Completed']">Completed Trainings</a>
     <a class="topnav-link" [routerLink]="['/user/dashboard', 'Not Started' ]">Student Proposal</a>
