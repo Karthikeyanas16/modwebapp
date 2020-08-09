@@ -9,7 +9,8 @@ export const environment = {
   searchService: BASE_URL + `/api/search`,
   adminService: BASE_URL + `/api/admin`,
   authService: BASE_URL + `/api/auth`,
-  enrollmentService: BASE_URL + `/api/enrollment`
+  enrollmentService: BASE_URL + `/api/enrollment`,
+  notificationService: BASE_URL + `/api/notification`
 };
 
 /*

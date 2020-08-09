@@ -15,9 +15,9 @@ export class CourseService {
 
     geAllCourses(): Observable<any> {
         let url: any = `${environment.searchService}/courses`;
-        // if (this.authService.getAuthUser().id) {
-        //     url = `${environment.searchService}/courses/` + this.authService.getAuthUser().id;
-        // }
+        if (this.authService.getAuthUser().id) {
+            url = `${environment.enrollmentService}/search/user/enrolled/` + this.authService.getAuthUser().id;
+        }
         return this.http.get(url).pipe(
             map(response => {
                 this.courses.next(response);
@@ -50,6 +50,15 @@ export class CourseService {
         const url: any = `${environment.enrollmentService}/create`;
         return this.http.post(url, reqBody).pipe(
             map(response => {
+                return response;
+            })
+        );
+    }
+    getNotification(): Observable<any> {
+        const url: any = `${environment.notificationService}/notification/get/` + this.authService.getAuthUser().id;
+        return this.http.get(url).pipe(
+            map(response => {
+                this.courses.next(response);
                 return response;
             })
         );
