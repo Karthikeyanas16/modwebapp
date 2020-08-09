@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   isLoggedIn: boolean;
   displayEnroll: boolean;
   // tslint:disable-next-line:max-line-length
-  courseEnroll: any = { id: '', user_id: '', technology_id: '', technology: '', name: '', description: '', comments: '', fees: '', proposalAmount: '', proposalStatus: 'Not Started' };
+  courseEnroll: any = { id: '', user_id: '', technology_id: '', technology: '', name: '', description: '', comments: '', fees: '', proposalAmount: '', proposalStatus: 'Not Started', mentor_id: '' };
   constructor(private courseService: CourseService, public el: ElementRef, private authService: AuthService, private route: Router) {
   }
 
@@ -44,6 +44,7 @@ export class HomeComponent implements OnInit {
     });
   }
   enroll(course: any) {
+    console.log(course)
     this.msgStatus.status = false;
     this.msgStatus.message = '';
     this.msgStatus.popup = true;
@@ -51,7 +52,7 @@ export class HomeComponent implements OnInit {
       this.displayAlert = false;
       this.displayEnroll = true;
       // tslint:disable-next-line:max-line-length
-      this.courseEnroll = { user_id: this.authService.getAuthUser().id, technology: course.technology, fees: course.fees, description: course.description, name: course.name, technology_id: course.id, comments: '', proposalAmount: course.fees, proposalStatus: 'Not Started' };
+      this.courseEnroll = { user_id: this.authService.getAuthUser().id, technology: course.technology, fees: course.fees, description: course.description, name: course.name, technology_id: course.id, comments: '', proposalAmount: course.fees, proposalStatus: 'Not Started', mentor_id: course.id };
     } else {
       this.displayAlert = true;
       this.displayEnroll = false;
@@ -66,12 +67,12 @@ export class HomeComponent implements OnInit {
   sendProposal() {
     if (this.authService.getAuthUser().id && this.courseEnroll.technology_id && this.courseEnroll.proposalAmount) {
       const reqBody: any = {
-        id: '',
         user_id: this.authService.getAuthUser().id,
         technology_id: this.courseEnroll.technology_id,
         comments: this.courseEnroll.comments,
         proposalAmount: this.courseEnroll.proposalAmount,
-        proposalStatus: 'Not Started'
+        proposalStatus: 'Not Started',
+        mentor_id: this.courseEnroll.mentor_id
       };
       this.courseService.courseEnroll(reqBody).subscribe(res => {
         console.log(res);
@@ -97,6 +98,6 @@ export class HomeComponent implements OnInit {
   }
   onClose() {
     // tslint:disable-next-line:max-line-length
-    this.courseEnroll = { id: '', user_id: '', technology_id: '', technology: '', name: '', description: '', comments: '', fees: '', proposalAmount: '', proposalStatus: 'Not Started' };
+    this.courseEnroll = { id: '', user_id: '', technology_id: '', technology: '', name: '', description: '', comments: '', fees: '', proposalAmount: '', proposalStatus: 'Not Started', mentor_id: '' };
   }
 }

@@ -71,7 +71,7 @@ export class AdminService {
     }
 
     updateUser(reqBody): Observable<any> {
-        const url: any = `${environment.adminService}/user/create`;
+        const url: any = `${environment.userService}/register`;
         return this.http.post(url, reqBody).pipe(
             map(response => {
                 return response;
