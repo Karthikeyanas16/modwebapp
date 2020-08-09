@@ -15,9 +15,9 @@ export class CourseService {
 
     geAllCourses(): Observable<any> {
         let url: any = `${environment.searchService}/courses`;
-        if (this.authService.getAuthUser().id) {
-            url = `${environment.enrollmentService}/search/user/enrolled/` + this.authService.getAuthUser().id;
-        }
+        // if (this.authService.getIsAuth()) {
+        //     url = `${environment.enrollmentService}/search/user/enrolled/` + this.authService.getAuthUser().id;
+        // }
         return this.http.get(url).pipe(
             map(response => {
                 this.courses.next(response);

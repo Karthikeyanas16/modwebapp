@@ -1,0 +1,45 @@
+<div>
+    <div class="col-md-12" *ngIf="proposals.length">
+        <p-table #dt [value]="proposals" [resizableColumns]="true" [scrollable]="true" columnResizeMode="true"
+            [(selection)]="selectedProposals" dataKey="id" styleClass="ui-table-customers" [rowHover]="true" [rows]="10"
+            [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+            >
+            <ng-template pTemplate="caption">
+                <h4> <strong> VIEW PROPOSALS </strong> </h4>
+                <div *ngIf="msgStatus.status && !msgStatus.popup" class="mt-5"
+                    [ngClass]=" msgStatus.type ? 'lead alert alert-success': 'lead alert alert-danger'" role="alert">
+                    {{msgStatus.message}}
+                </div>
+                <div class="ui-table-globalfilter-container">
+                    <input pInputText class="form-control" type="text"
+                        (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search User/Technology" />
+                </div>
+
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 50px !important;">Id</th>
+                    <th style="width: 200px !important;">User Email</th>
+                    <th style="width: 200px !important;">Mentor Email</th>
+                    <th style="width: 200px !important;">Enrolled Technology</th>
+                    <th style="width: 200px !important;">Proposal Amount</th>
+                    <th style="width: 100px !important;">Status</th>
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-proposal>
+                <tr>
+                    <td style="width: 50px !important;">{{proposal.id}}</td>
+                    <td style="width: 200px !important;">{{proposal.username}}</td>
+                    <td style="width: 200px !important;">{{proposal.mentorname}}</td>
+                    <td style="width: 200px !important;">{{proposal.technology}}</td>
+                    <td style="width: 200px !important;">{{proposal.proposalAmount}}</td>
+                    <td style="width: 100px !important;"><span
+                        [ngClass]="proposal.proposalStatus != 'Not Started' ? 'badge badge-success' : 'badge badge-danger'">{{proposal.proposalStatus == 'Not Started' ? 'Not Started' : 'Started'}}</span>
+                </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

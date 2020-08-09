@@ -17,6 +17,7 @@ import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { ComingSoonComponent } from './coming-soon/coming-soon.component';
+import { ViewProposalsComponent } from './view-proposals/view-proposals.component';
 
 
 
@@ -28,7 +29,7 @@ import { ComingSoonComponent } from './coming-soon/coming-soon.component';
     ManageDomainsComponent,
     TechnologyComponent,
     ManagePaymentsComponent,
-    AppSettingsComponent, AdminMenuComponent, AdminDashboardComponent, ComingSoonComponent
+    AppSettingsComponent, AdminMenuComponent, AdminDashboardComponent, ComingSoonComponent, ViewProposalsComponent
   ],
   imports: [
     CommonModule,
