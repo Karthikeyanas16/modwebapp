@@ -11,7 +11,7 @@ const routes: Routes = [
     path: '', component: MentorComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'dashboard', component: MentorDashboardComponent, pathMatch: 'full' },
+      { path: 'dashboard/:search', component: MentorDashboardComponent, pathMatch: 'full' },
       { path: 'public-profile', component: MentorProfileComponent, pathMatch: 'full' }
     ]
   },

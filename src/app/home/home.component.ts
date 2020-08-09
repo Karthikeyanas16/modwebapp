@@ -44,6 +44,9 @@ export class HomeComponent implements OnInit {
     });
   }
   enroll(course: any) {
+    this.msgStatus.status = false;
+    this.msgStatus.message = '';
+    this.msgStatus.popup = true;
     if (this.authService.getIsAuth()) {
       this.displayAlert = false;
       this.displayEnroll = true;
@@ -63,7 +66,7 @@ export class HomeComponent implements OnInit {
   sendProposal() {
     if (this.authService.getAuthUser().id && this.courseEnroll.technology_id && this.courseEnroll.proposalAmount) {
       const reqBody: any = {
-        id: this.courseEnroll.technology_id,
+        id: '',
         user_id: this.authService.getAuthUser().id,
         technology_id: this.courseEnroll.technology_id,
         comments: this.courseEnroll.comments,
@@ -77,6 +80,8 @@ export class HomeComponent implements OnInit {
         this.msgStatus.message = 'Proposal sent successfully.';
         this.displayEnroll = false;
         this.getCourseList();
+        // tslint:disable-next-line:max-line-length
+        this.courseEnroll = { id: '', user_id: '', technology_id: '', technology: '', name: '', description: '', comments: '', fees: '', proposalAmount: '', proposalStatus: 'Not Started' };
       }, error => {
         console.log('error', error);
         let msg = 'Oops !! Something went wrong, please contact the administrator';
@@ -89,5 +94,9 @@ export class HomeComponent implements OnInit {
         this.msgStatus.popup = true;
       });
     }
+  }
+  onClose() {
+    // tslint:disable-next-line:max-line-length
+    this.courseEnroll = { id: '', user_id: '', technology_id: '', technology: '', name: '', description: '', comments: '', fees: '', proposalAmount: '', proposalStatus: 'Not Started' };
   }
 }

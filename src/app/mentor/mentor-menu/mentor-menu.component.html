@@ -1,7 +1,7 @@
 <div class="topnav menu-divider">
     <a class="topnav-link active" [routerLink]="['/mentor/dashboard']">{{ auth.name | uppercase}} | {{ auth.email }}</a>
-    <a class="topnav-link" [routerLink]="['/mentor/dashboard']">Current Trainings</a>
-    <a class="topnav-link" [routerLink]="['/mentor/dashboard']">Completed Trainings</a>
-    <a class="topnav-link" [routerLink]="['/mentor/dashboard']">Technology</a>
-    <a class="topnav-link" [routerLink]="['/mentor/dashboard']">Students Proposals</a>
+    <a class="topnav-link" [routerLink]="['/mentor/dashboard','In progress']">Current Trainings</a>
+    <a class="topnav-link" [routerLink]="['/mentor/dashboard','Completed']">Completed Trainings</a>
+    <a class="topnav-link" [routerLink]="['/mentor/dashboard','Not Started']">Students Proposals</a>
+    <!-- <a class="topnav-link" [routerLink]="['/mentor/dashboard','Submitted']">Students Proposals</a> -->
 </div>
