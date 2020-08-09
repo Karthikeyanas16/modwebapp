@@ -6,16 +6,21 @@
     <div class="row">
         <div class="col-sm-6" *ngFor="let course of courseList">
             <div class="card card-list">
-                <span class="badge badge-warning" style="float: right;width: fit-content;">₹ {{course.fees}}</span>
+                <span class="badge badge-warning" style="float: right;width: fit-content;">₹
+                    {{course.fees}}</span>
                 <div class="card-body">
 
                     <h5 class="card-title">{{course.technology | uppercase}}</h5>
                     <div class="card-title">
-                        <span class="blockquote-footer">By :<cite title="Source Title"> {{course.name}}</cite>
+                        <span class="blockquote-footer">By :<cite title="Source Title"> {{course.mentor}}</cite>
                         </span>
                     </div>
                     <p class="card-text">{{course.description}}</p>
-                    <a href="#" class="btn btn-primary">Enroll</a>
+                    <p class="card-text">{{course.comments}}</p>
+                    <p class="card-text">{{course.proposal_status}}</p>
+                    <p class="card-text">{{course.proposal_amount}}</p>
+                    <span class="badge badge-success" style="float: right;width: fit-content;">
+                        {{course.proposalStatus}}</span>
                 </div>
             </div>
         </div>

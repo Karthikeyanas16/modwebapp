@@ -24,8 +24,8 @@
       </div>
     </div>
   </div>
-  <p-dialog header="Alert" [(visible)]="displayAlert" [transitionOptions]="'0ms'" [modal]="true" [baseZIndex]="10000"
-    [draggable]="false" [resizable]="true">
+  <p-dialog header="Alert" [(visible)]="displayAlert" [transitionOptions]="'0ms'" (close)="onClose()" [modal]="true"
+    [baseZIndex]="10000" [draggable]="false" [resizable]="true">
     <div class="ui-helper-clearfix" style="height: auto; width:auto;">
       <label>Not logged in, please log in to continue</label>
     </div>

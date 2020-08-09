@@ -14,7 +14,7 @@ export class MentorComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.getIsAuth();
-    this.route.navigate(['mentor/dashboard']);
+    this.route.navigate(['mentor/dashboard', 'Not Started']);
   }
   goToDashboard() {
     this.authService.navigateUser();

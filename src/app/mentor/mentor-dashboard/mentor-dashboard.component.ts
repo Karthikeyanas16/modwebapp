@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CourseService } from 'src/app/course.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-mentor-dashboard',
@@ -11,17 +12,22 @@ export class MentorDashboardComponent implements OnInit {
   msgStatus = { status: false, type: true, message: '' };
   courseList: any = [];
   searchSub: Subscription;
-  constructor(private courseService: CourseService) { }
+  search: string;
+  private sub: any;
+  constructor(private courseService: CourseService, private routes: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getCourseList();
+    this.sub = this.routes.params.subscribe(params => {
+      this.search = params['search'];
+      this.getCourseList();
+    });
     this.searchSub = this.courseService.courses.subscribe((value) => {
       this.courseList = value;
     });
   }
 
   getCourseList() {
-    this.courseService.geAllCourses().subscribe(res => {
+    this.courseService.geUserCourses(this.search).subscribe(res => {
       console.log('res', res);
       this.courseList = res;
     }, error => {

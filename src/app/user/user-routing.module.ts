@@ -10,7 +10,7 @@ const routes: Routes = [{
   path: '', component: UserComponent,
   canActivate: [AuthGuard],
   children: [
-    { path: 'dashboard', component: UserDashboardComponent, pathMatch: 'full' },
+    { path: 'dashboard/:search', component: UserDashboardComponent, pathMatch: 'full' },
     { path: 'public-profile', component: UserProfileComponent, pathMatch: 'full' }
   ]
 }];
