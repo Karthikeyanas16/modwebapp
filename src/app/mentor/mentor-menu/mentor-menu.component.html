@@ -1,7 +1,7 @@
 <div class="topnav menu-divider">
-    <a class="topnav-link active" [routerLink]="['/mentor/dashboard','Not Started']">{{ auth.name | uppercase}} |
+    <a class="topnav-link active" [routerLink]="['/mentor/dashboard','list']">{{ auth.name | uppercase}} |
         {{ auth.email }}</a>
-    <a class="topnav-link" [routerLink]="['/mentor/dashboard','In progress']">Current Trainings</a>
+    <a class="topnav-link" [routerLink]="['/mentor/dashboard','Started']">Current Trainings</a>
     <a class="topnav-link" [routerLink]="['/mentor/dashboard','Completed']">Completed Trainings</a>
     <a class="topnav-link" [routerLink]="['/mentor/dashboard','Not Started']">Pending Proposals</a>
     <a class="topnav-link" [routerLink]="['/mentor/dashboard','Cancelled']">Cancelled Proposals</a>

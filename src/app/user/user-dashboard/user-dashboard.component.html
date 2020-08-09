@@ -1,5 +1,5 @@
 <div class="row" style="margin-top: 70px;">
-    <div *ngIf="msgStatus.status" class="mt-5"
+    <div *ngIf="msgStatus.status" class="m-100"
         [ngClass]=" msgStatus.type ? 'lead alert alert-success': 'lead alert alert-danger'" role="alert">
         {{msgStatus.message}}
     </div>
@@ -14,18 +14,18 @@
                 'badge-danger': course.proposalStatus == 'Cancelled'}" style="float: right;width: fit-content;">
                     {{course.proposalStatus}}</span>
                 <div class="card-body">
-
                     <h5 class="card-title">{{course.technology | uppercase}}</h5>
-                    <div class="card-title">
-                        <span class="blockquote-footer">By :<cite title="Source Title"> {{course.mentorname}}</cite>
-                        </span>
-                    </div>
                     <p class="card-text">{{course.description}}</p>
-                    <p class="card-text">{{course.comments}}</p>
-                    <p class="card-text">{{course.proposal_status}}</p>
-                    <p class="card-text">{{course.proposal_amount}}</p>
-                    <!-- <span class="badge badge-success" style="float: right;width: fit-content;">
-                        {{course.proposalStatus}}</span> -->
+                    <hr class="line-hr" />
+
+                    <p class="card-text"><span class=" badge badge-light">Proposal Amount: ₹
+                            {{course.proposalAmount}}</span>
+                    </p>
+                    <p class="card-text"><span class=" badge badge-light"> Comment :{{course.comments}}</span>
+                    </p>
+                    <p class="card-text lead"><span class=" badge badge-light">Mentor Name :
+                            {{course.mentorname}}</span>
+                    </p>
                 </div>
             </div>
         </div>

@@ -21,7 +21,7 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.sub = this.routes.params.subscribe(params => {
       this.search = params['search'];
-      this.getCourseList();
+      this.search === 'list' ? this.getCourseList() : this.getCoursesByStatus();
     });
     this.isLoggedIn = this.authService.getIsAuth();
     this.searchSub = this.courseService.courses.subscribe((value) => {
@@ -29,10 +29,40 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
     });
   }
 
+
   getCourseList() {
-    this.courseService.geUserCourses(this.search).subscribe(res => {
+    this.courseService.getUserCourses().subscribe(res => {
+      // console.log('res', res);
+      this.courseList = res;
+      this.msgStatus.message = '';
+      this.msgStatus.status = false;
+      if (!this.courseList.length) {
+        this.msgStatus.status = true;
+        this.msgStatus.message = 'Not record found !';
+        this.msgStatus.type = false;
+      }
+    }, error => {
+      console.log('error', error);
+      let msg = 'Oops !! Something went wrong, please contact the administrator';
+      if (error.error.message) {
+        msg = error.error.message;
+      }
+      this.msgStatus.status = true;
+      this.msgStatus.message = msg;
+      this.msgStatus.type = false;
+    });
+  }
+  getCoursesByStatus() {
+    this.courseService.getCoursesByStatus(this.search).subscribe(res => {
       console.log('res', res);
       this.courseList = res;
+      this.msgStatus.message = '';
+      this.msgStatus.status = false;
+      if (!this.courseList.length) {
+        this.msgStatus.status = true;
+        this.msgStatus.message = 'Not record found !';
+        this.msgStatus.type = false;
+      }
     }, error => {
       console.log('error', error);
       let msg = 'Oops !! Something went wrong, please contact the administrator';

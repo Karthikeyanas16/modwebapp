@@ -1,31 +1,30 @@
 <div class="row" style="margin-top: 70px;">
-    <div *ngIf="msgStatus.status" class="mt-5"
+    <div *ngIf="msgStatus.status" class="m-100"
         [ngClass]=" msgStatus.type ? 'lead alert alert-success': 'lead alert alert-danger'" role="alert">
         {{msgStatus.message}}
     </div>
     <div class="row" style="width: 100%;">
         <div class="col-sm-6" *ngFor="let course of courseList">
             <div class="card card-list">
-                <!-- <span class="badge badge-warning" style="float: right;width: fit-content;">₹
-                    {{course.fees}}</span> -->
                 <span class="badge" [ngClass]="{'badge-success': course.proposalStatus == 'Started',
                 'badge-warning': course.proposalStatus == 'Not Started', 
                 'badge-info': course.proposalStatus == 'Completed',
                 'badge-danger': course.proposalStatus == 'Cancelled'}" style="float: right;width: fit-content;">
                     {{course.proposalStatus}}</span>
                 <div class="card-body">
-
                     <h5 class="card-title">{{course.technology | uppercase}}</h5>
-                    <div class="card-title">
-                        <span class="blockquote-footer">By :<cite title="Source Title"> {{course.mentorname}}</cite>
-                        </span>
-                    </div>
                     <p class="card-text">{{course.description}}</p>
-                    <p class="card-text">{{course.comments}}</p>
-                    <p class="card-text">{{course.proposal_status}}</p>
-                    <p class="card-text">{{course.proposal_amount}}</p>
-                    <!-- <span class="badge badge-success" style="float: right;width: fit-content;">
-                        {{course.proposalStatus}}</span> -->
+                    <hr class="line-hr" />
+                    <p class="card-text"><span class=" badge badge-light">Student Comment :{{course.comments}}</span>
+                    </p>
+                    <p class="card-text"><span class=" badge badge-light">Proposal Amount: ₹
+                            {{course.proposalAmount}}</span>
+                    </p>
+                    <p class="card-text lead"><span class=" badge badge-light">Student Name : {{course.username}}</span>
+                    </p>
+                    <p *ngIf="course.proposalStatus == 'Not Started'" class="card-text" style="float: right;"><span
+                            class="btn btn-info">Accept </span>
+                        &nbsp;<span class="btn btn-danger">Reject</span></p>
                 </div>
             </div>
         </div>

@@ -25,13 +25,35 @@ export class CourseService {
             })
         );
     }
+    getMentorCourses(): Observable<any> {
+        const url: any = `${environment.enrollmentService}/search/mentor/enrolled/` + this.authService.getAuthUser().id;
+        return this.http.get(url).pipe(
+            map(response => {
+                return response;
+            })
+        );
+    }
+    getCoursesByMentor(text): Observable<any> {
+        const url: any = `${environment.enrollmentService}/search/mentor/` + this.authService.getAuthUser().id + `/` + text;
+        return this.http.get(url).pipe(
+            map(response => {
+                return response;
+            })
+        );
+    }
+    getUserCourses(): Observable<any> {
+        const url: any = `${environment.enrollmentService}/search/user/enrolled/` + this.authService.getAuthUser().id;
+        return this.http.get(url).pipe(
+            map(response => {
+                return response;
+            })
+        );
+    }
 
-    geUserCourses(text): Observable<any> {
-        // let url: any = `${environment.searchService}/courses`;
+    getCoursesByStatus(text): Observable<any> {
         const url: any = `${environment.enrollmentService}/search/` + this.authService.getAuthUser().id + `/` + text;
         return this.http.get(url).pipe(
             map(response => {
-                this.courses.next(response);
                 return response;
             })
         );
