@@ -71,13 +71,14 @@ export class AdminService {
     }
 
     updateUser(reqBody): Observable<any> {
-        const url: any = `${environment.userService}/register`;
+        const url: any = `${environment.adminService}/user/update`;
         return this.http.post(url, reqBody).pipe(
             map(response => {
                 return response;
             })
         );
     }
+
     updateTechnology(reqBody): Observable<any> {
         const url: any = `${environment.adminService}/course/create`;
         return this.http.post(url, reqBody).pipe(

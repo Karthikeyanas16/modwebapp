@@ -16,7 +16,7 @@ export class CourseService {
     geAllCourses(): Observable<any> {
         let url: any = `${environment.searchService}/courses`;
         // if (this.authService.getIsAuth()) {
-        //     url = `${environment.enrollmentService}/search/user/enrolled/` + this.authService.getAuthUser().id;
+        //     url = `${environment.enrollmentService}/courses/` + this.authService.getAuthUser().id;
         // }
         return this.http.get(url).pipe(
             map(response => {
@@ -77,8 +77,16 @@ export class CourseService {
             })
         );
     }
+    acceptProposal(reqBody): Observable<any> {
+        const url: any = `${environment.enrollmentService}/update/enrollment-status`;
+        return this.http.post(url, reqBody).pipe(
+            map(response => {
+                return response;
+            })
+        );
+    }
     getNotification(): Observable<any> {
-        const url: any = `${environment.notificationService}/notification/get/` + `${this.authService.getAuthUser().id}`;
+        const url: any = `${environment.notificationService}/notification/get?userId=` + this.authService.getAuthUser().id;
         return this.http.get(url).pipe(
             map(response => {
                 this.courses.next(response);

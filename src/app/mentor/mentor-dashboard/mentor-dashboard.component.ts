@@ -3,6 +3,8 @@ import { Subscription } from 'rxjs';
 import { CourseService } from 'src/app/course.service';
 import { ActivatedRoute } from '@angular/router';
 
+type NewType = any;
+
 @Component({
   selector: 'app-mentor-dashboard',
   templateUrl: './mentor-dashboard.component.html',
@@ -70,5 +72,11 @@ export class MentorDashboardComponent implements OnInit {
       this.msgStatus.type = false;
     });
   }
+  acceptProposal(enId: any, type: string) {
+    const reqBody = { id: enId, proposalStatus: type };
+    this.courseService.acceptProposal(reqBody).subscribe(res => {
+      console.log(res);
 
+    });
+  }
 }

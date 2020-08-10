@@ -3,6 +3,7 @@ import { CourseService } from '../course.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,7 @@ export class HomeComponent implements OnInit {
   displayEnroll: boolean;
   // tslint:disable-next-line:max-line-length
   courseEnroll: any = { id: '', user_id: '', technology_id: '', technology: '', name: '', description: '', comments: '', fees: '', proposalAmount: '', proposalStatus: 'Not Started', mentorId: '' };
+  List: any = [];
   constructor(private courseService: CourseService, public el: ElementRef, private authService: AuthService, private route: Router) {
   }
 
@@ -26,21 +28,20 @@ export class HomeComponent implements OnInit {
     this.isLoggedIn = this.authService.getIsAuth();
     this.getCourseList();
     this.searchSub = this.courseService.courses.subscribe((value) => {
-      this.courseList = value;
+      this.List = value;
+      this.setData();
     });
 
   }
   getUserCourse() {
     this.courseService.getUserCourses().subscribe(
-      async res => {
-        // tslint:disable-next-line:prefer-for-of
-        for (let index = 0; index < res.length; index++) {
-          this.enrolledCourses.push(res[index].technology_id);
-        }
-        console.log('exista', this.enrolledCourses);
-        await this.setData();
+      res => {
+        this.enrolledCourses = res;
         this.msgStatus.message = '';
         this.msgStatus.status = false;
+        if (this.isLoggedIn) {
+          this.setData();
+        }
         if (!this.courseList.length) {
           this.msgStatus.status = true;
           this.msgStatus.message = 'Not record found !';
@@ -59,14 +60,12 @@ export class HomeComponent implements OnInit {
   }
   getCourseList() {
     this.courseService.geAllCourses().subscribe(res => {
-      this.courseList = res;
-      // tslint:disable-next-line:prefer-for-of
+      this.List = res;
       if (this.isLoggedIn) {
-        if (this.authService.getAuthUser().role === 'user') {
-          this.getUserCourse();
-        }
+        // if (this.authService.getAuthUser().role === 'user') {
+        this.getUserCourse();
+        // }
       }
-
     }, error => {
       console.log('error', error);
       let msg = 'Oops !! Something went wrong, please contact the administrator';
@@ -135,14 +134,24 @@ export class HomeComponent implements OnInit {
     // tslint:disable-next-line:max-line-length
     this.courseEnroll = { id: '', user_id: '', technology_id: '', technology: '', name: '', description: '', comments: '', fees: '', proposalAmount: '', proposalStatus: 'Not Started', mentorId: '' };
   }
-  async setData() {
+  setData() {
     // tslint:disable-next-line:prefer-for-of
-    for (let index = 0; index < this.courseList.length; index++) {
-      const element = this.courseList[index];
-      if (this.enrolledCourses.includes(element.id) && this.enrolledCourses.includes(element.mentorId)) {
-        this.courseList[index].status = 'NA';
+    for (const key in this.List) {
+      if (Object.prototype.hasOwnProperty.call(this.List, key)) {
+        const element = this.List[key];
+        for (const k in this.enrolledCourses) {
+          if (Object.prototype.hasOwnProperty.call(this.enrolledCourses, k)) {
+            const courses = this.enrolledCourses[k];
+            if (element.id === courses.technology_id) {
+              element.status = 'Started';
+              // console.log(element, element.id);
+            }
+          }
+        }
       }
     }
-    console.log(this.courseList);
+    this.courseList = this.List;
+    // console.log('courseEnroll', JSON.stringify(this.courseList));
+
   }
 }
