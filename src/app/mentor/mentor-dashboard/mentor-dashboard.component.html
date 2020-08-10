@@ -23,8 +23,8 @@
                     <p class="card-text lead"><span class=" badge badge-light">Student Name : {{course.username}}</span>
                     </p>
                     <p *ngIf="course.proposalStatus == 'Not Started'" class="card-text" style="float: right;"><span
-                            class="btn btn-info" (click)="acceptProposal(course.id,'Started')">Accept </span>
-                        &nbsp;<span class="btn btn-danger" (click)="acceptProposal(course.id,'Cancelled')">Reject</span>
+                            class="btn btn-info" (click)="acceptProposal(course,'Started')">Accept </span>
+                        &nbsp;<span class="btn btn-danger" (click)="acceptProposal(course,'Cancelled')">Reject</span>
                     </p>
                 </div>
             </div>

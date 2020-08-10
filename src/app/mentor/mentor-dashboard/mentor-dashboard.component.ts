@@ -72,10 +72,20 @@ export class MentorDashboardComponent implements OnInit {
       this.msgStatus.type = false;
     });
   }
-  acceptProposal(enId: any, type: string) {
-    const reqBody = { id: enId, proposalStatus: type };
+  acceptProposal(course: any, type: string) {
+    const reqBody = { user_id: course.user_id, mentor_id: course.mentor_id, technology_id: course.technology_id, proposalStatus: type };
     this.courseService.acceptProposal(reqBody).subscribe(res => {
-      console.log(res);
+      this.msgStatus.message = 'Proposal' + type + 'Successfully';
+      this.msgStatus.status = false;
+    }, error => {
+      console.log('error', error);
+      let msg = 'Oops !! Something went wrong, please contact the administrator';
+      if (error.error.message) {
+        msg = error.error.message;
+      }
+      this.msgStatus.status = true;
+      this.msgStatus.message = msg;
+      this.msgStatus.type = false;
 
     });
   }
