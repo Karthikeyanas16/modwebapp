@@ -21,11 +21,17 @@ export class HomeComponent implements OnInit {
   // tslint:disable-next-line:max-line-length
   courseEnroll: any = { id: '', user_id: '', technology_id: '', technology: '', name: '', description: '', comments: '', fees: '', proposalAmount: '', proposalStatus: 'Not Started', mentorId: '' };
   List: any = [];
+  auth: any;
   constructor(private courseService: CourseService, public el: ElementRef, private authService: AuthService, private route: Router) {
   }
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.getIsAuth();
+    if (this.isLoggedIn) {
+      if (this.authService.getAuthUser().role == 'user') {
+        this.auth = true;
+      }
+    }
     this.getCourseList();
     this.searchSub = this.courseService.courses.subscribe((value) => {
       this.List = value;
