@@ -31,35 +31,31 @@ export class HomeComponent implements OnInit {
 
   }
   getUserCourse() {
-    this.courseService.getUserCourses().subscribe(res => {
-      // tslint:disable-next-line:prefer-for-of
-      for (let index = 0; index < res.length; index++) {
-        this.enrolledCourses.push(res[index].technology_id);
-      }
-      // tslint:disable-next-line:prefer-for-of
-      for (let index = 0; index < this.courseList.length; index++) {
-        const element = this.courseList[index];
-        if (!this.enrolledCourses.includes(element.id)) {
-          this.courseList[index].status = 'NA';
+    this.courseService.getUserCourses().subscribe(
+      async res => {
+        // tslint:disable-next-line:prefer-for-of
+        for (let index = 0; index < res.length; index++) {
+          this.enrolledCourses.push(res[index].technology_id);
         }
-      }
-      this.msgStatus.message = '';
-      this.msgStatus.status = false;
-      if (!this.courseList.length) {
+        console.log('exista', this.enrolledCourses);
+        await this.setData();
+        this.msgStatus.message = '';
+        this.msgStatus.status = false;
+        if (!this.courseList.length) {
+          this.msgStatus.status = true;
+          this.msgStatus.message = 'Not record found !';
+          this.msgStatus.type = false;
+        }
+      }, error => {
+        console.log('error', error);
+        let msg = 'Oops !! Something went wrong, please contact the administrator';
+        if (error.error.message) {
+          msg = error.error.message;
+        }
         this.msgStatus.status = true;
-        this.msgStatus.message = 'Not record found !';
+        this.msgStatus.message = msg;
         this.msgStatus.type = false;
-      }
-    }, error => {
-      console.log('error', error);
-      let msg = 'Oops !! Something went wrong, please contact the administrator';
-      if (error.error.message) {
-        msg = error.error.message;
-      }
-      this.msgStatus.status = true;
-      this.msgStatus.message = msg;
-      this.msgStatus.type = false;
-    });
+      });
   }
   getCourseList() {
     this.courseService.geAllCourses().subscribe(res => {
@@ -138,5 +134,15 @@ export class HomeComponent implements OnInit {
   onClose() {
     // tslint:disable-next-line:max-line-length
     this.courseEnroll = { id: '', user_id: '', technology_id: '', technology: '', name: '', description: '', comments: '', fees: '', proposalAmount: '', proposalStatus: 'Not Started', mentorId: '' };
+  }
+  async setData() {
+    // tslint:disable-next-line:prefer-for-of
+    for (let index = 0; index < this.courseList.length; index++) {
+      const element = this.courseList[index];
+      if (this.enrolledCourses.includes(element.id) && this.enrolledCourses.includes(element.mentorId)) {
+        this.courseList[index].status = 'NA';
+      }
+    }
+    console.log(this.courseList);
   }
 }
