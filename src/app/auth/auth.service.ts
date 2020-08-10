@@ -25,7 +25,7 @@ export class AuthService {
     this.token = null;
     localStorage.removeItem('token');
     this.authStatusListener.next(false);
-    this.route.navigate(['/']);
+    this.route.navigate(['/auth/login']);
   }
 
   getToken() {

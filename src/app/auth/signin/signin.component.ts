@@ -43,8 +43,8 @@ export class SigninComponent implements OnInit {
           this.msgStatus.status = true;
           this.msgStatus.message = 'Login Successful !';
           this.msgStatus.type = true;
-          this.route.navigate(['/']);
-          // this.authService.navigateUser();
+          // this.route.navigate(['/']);
+          this.authService.navigateUser();
 
         },
         error => {

@@ -1,4 +1,4 @@
-<div class="row" style="margin-top: 70px;">
+<div class="row" style="margin-top: 10px;">
     <div *ngIf="msgStatus.status" class="m-100"
         [ngClass]=" msgStatus.type ? 'lead alert alert-success': 'lead alert alert-danger'" role="alert">
         {{msgStatus.message}}
@@ -12,7 +12,7 @@
                 'badge-warning': course.proposalStatus == 'Not Started', 
                 'badge-info': course.proposalStatus == 'Completed',
                 'badge-danger': course.proposalStatus == 'Cancelled'}" style="float: right;width: fit-content;">
-                    {{course.proposalStatus}}</span>
+                    {{course.proposalStatus =='Not Started' ? 'Available to Enroll' : course.proposalStatus }}</span>
                 <div class="card-body">
                     <h5 class="card-title">{{course.technology | uppercase}}</h5>
                     <p class="card-text">{{course.description}}</p>
@@ -26,6 +26,8 @@
                     <p class="card-text lead"><span class=" badge badge-light">Mentor Name :
                             {{course.mentorname}}</span>
                     </p>
+                    <button *ngIf="course.proposalStatus =='Not Started'" class="btn btn-primary">Enroll</button>
+
                 </div>
             </div>
         </div>
