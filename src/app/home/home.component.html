@@ -17,7 +17,7 @@
               </span>
             </div>
             <p class="card-text">{{course.description | newline}}</p>
-            <button class="btn btn-primary" [disabled]="course.status =='Started'"
+            <button class="btn btn-primary" *ngIf="auth" [disabled]="course.status =='Started'"
               (click)="enroll(course)">Enroll</button>
           </div>
         </div>
