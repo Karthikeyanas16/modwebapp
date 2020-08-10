@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
   msgStatus = { status: false, type: true, message: '', popup: false };
   courseList: any = [];
+  enrolledCourses: any = [];
   searchSub: Subscription;
   displayAlert: boolean;
   isLoggedIn: boolean;
@@ -27,11 +28,49 @@ export class HomeComponent implements OnInit {
     this.searchSub = this.courseService.courses.subscribe((value) => {
       this.courseList = value;
     });
-  }
 
+  }
+  getUserCourse() {
+    this.courseService.getUserCourses().subscribe(res => {
+      // tslint:disable-next-line:prefer-for-of
+      for (let index = 0; index < res.length; index++) {
+        this.enrolledCourses.push(res[index].technology_id);
+      }
+      // tslint:disable-next-line:prefer-for-of
+      for (let index = 0; index < this.courseList.length; index++) {
+        const element = this.courseList[index];
+        if (!this.enrolledCourses.includes(element.id)) {
+          this.courseList[index].status = 'NA';
+        }
+      }
+      this.msgStatus.message = '';
+      this.msgStatus.status = false;
+      if (!this.courseList.length) {
+        this.msgStatus.status = true;
+        this.msgStatus.message = 'Not record found !';
+        this.msgStatus.type = false;
+      }
+    }, error => {
+      console.log('error', error);
+      let msg = 'Oops !! Something went wrong, please contact the administrator';
+      if (error.error.message) {
+        msg = error.error.message;
+      }
+      this.msgStatus.status = true;
+      this.msgStatus.message = msg;
+      this.msgStatus.type = false;
+    });
+  }
   getCourseList() {
     this.courseService.geAllCourses().subscribe(res => {
       this.courseList = res;
+      // tslint:disable-next-line:prefer-for-of
+      if (this.isLoggedIn) {
+        if (this.authService.getAuthUser().role === 'user') {
+          this.getUserCourse();
+        }
+      }
+
     }, error => {
       console.log('error', error);
       let msg = 'Oops !! Something went wrong, please contact the administrator';
@@ -77,7 +116,7 @@ export class HomeComponent implements OnInit {
       this.courseService.courseEnroll(reqBody).subscribe(res => {
         // console.log(res);
         this.msgStatus.status = true;
-        this.msgStatus.popup = true;
+        this.msgStatus.popup = false;
         this.msgStatus.message = 'Proposal sent successfully.';
         this.displayEnroll = false;
         this.getCourseList();
