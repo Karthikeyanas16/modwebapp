@@ -17,7 +17,8 @@
               </span>
             </div>
             <p class="card-text">{{course.description | newline}}</p>
-            <button class="btn btn-primary" (click)="enroll(course)">Enroll</button>
+            {{ course.status}}
+            <button class="btn btn-primary" [disabled]="course.status =='NA'" (click)="enroll(course)">Enroll</button>
           </div>
         </div>
       </div>

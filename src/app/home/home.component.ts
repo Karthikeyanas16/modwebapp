@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   isLoggedIn: boolean;
   displayEnroll: boolean;
   // tslint:disable-next-line:max-line-length
-  courseEnroll: any = { id: '', user_id: '', technology_id: '', technology: '', name: '', description: '', comments: '', fees: '', proposalAmount: '', proposalStatus: 'Not Started', mentor_id: '' };
+  courseEnroll: any = { id: '', user_id: '', technology_id: '', technology: '', name: '', description: '', comments: '', fees: '', proposalAmount: '', proposalStatus: 'Not Started', mentorId: '' };
   constructor(private courseService: CourseService, public el: ElementRef, private authService: AuthService, private route: Router) {
   }
 
@@ -91,7 +91,7 @@ export class HomeComponent implements OnInit {
       this.displayAlert = false;
       this.displayEnroll = true;
       // tslint:disable-next-line:max-line-length
-      this.courseEnroll = { user_id: this.authService.getAuthUser().id, technology: course.technology, fees: course.fees, description: course.description, name: course.name, technology_id: course.id, comments: '', proposalAmount: course.fees, proposalStatus: 'Not Started', mentor_id: course.id };
+      this.courseEnroll = { user_id: this.authService.getAuthUser().id, technology: course.technology, fees: course.fees, description: course.description, name: course.name, technology_id: course.id, comments: '', proposalAmount: course.fees, proposalStatus: 'Not Started', mentorId: course.mentorId };
     } else {
       this.displayAlert = true;
       this.displayEnroll = false;
@@ -111,7 +111,7 @@ export class HomeComponent implements OnInit {
         comments: this.courseEnroll.comments,
         proposalAmount: this.courseEnroll.proposalAmount,
         proposalStatus: 'Not Started',
-        mentor_id: this.courseEnroll.mentor_id
+        mentor_id: this.courseEnroll.mentorId
       };
       this.courseService.courseEnroll(reqBody).subscribe(res => {
         // console.log(res);
@@ -137,6 +137,6 @@ export class HomeComponent implements OnInit {
   }
   onClose() {
     // tslint:disable-next-line:max-line-length
-    this.courseEnroll = { id: '', user_id: '', technology_id: '', technology: '', name: '', description: '', comments: '', fees: '', proposalAmount: '', proposalStatus: 'Not Started', mentor_id: '' };
+    this.courseEnroll = { id: '', user_id: '', technology_id: '', technology: '', name: '', description: '', comments: '', fees: '', proposalAmount: '', proposalStatus: 'Not Started', mentorId: '' };
   }
 }
