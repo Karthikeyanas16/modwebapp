@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
     this.isLoggedIn = this.authService.getIsAuth();
     if (this.authService.getAuthUser()) {
       this.auth = this.authService.getAuthUser();
-      this.getNotification();
+      //this.getNotification();
     }
     this.authStatSubs = this.authService
       .getAuthStatusListener()
