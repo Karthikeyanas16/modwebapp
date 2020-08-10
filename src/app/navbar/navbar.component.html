@@ -110,11 +110,14 @@
         <div class="dropdown" style="float:left;">
           <a class="btn btn-outline-info login-btn not-badge-btn dropbtn"><i class="far fa-bell"
               style="font-size: 20px;"></i><span class="badge badge-pill badge-danger not-badge"
-              style="font-size: 10px;">0</span></a>
+              style="font-size: 10px;">{{notification?.length ? notification.length : 0}}</span></a>
           <div class="dropdown-content">
-            <a [routerLink]="['mentor/profile']" class="pull-left"><strong>Notifications</strong></a>
-            <a [routerLink]="['mentor/profile']"></a>
-            <a [routerLink]="['mentor/profile']" style="text-align: center;">No notifications.</a>
+            <a class="pull-left"><strong>Notifications</strong></a>
+            <p *ngFor="let notify of notification">
+              <span style="width: 20px !important;">{{notify.description}}</span>
+              <span style="width: 3px !important;"><i class="fa fa-pencil"></i></span>
+            </p>
+            <a *ngIf="!notification?.length" style="text-align: center;">No notifications.</a>
           </div>
         </div>
       </li>

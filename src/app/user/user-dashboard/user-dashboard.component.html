@@ -1,5 +1,5 @@
 <div class="row" style="margin-top: 10px;">
-    <div *ngIf="msgStatus.status" class="m-100"
+    <div *ngIf="msgStatus.status && !msgStatus.popup" class="mt-5"
         [ngClass]=" msgStatus.type ? 'lead alert alert-success': 'lead alert alert-danger'" role="alert">
         {{msgStatus.message}}
     </div>
@@ -12,7 +12,9 @@
                 'badge-warning': course.proposalStatus == 'Not Started', 
                 'badge-info': course.proposalStatus == 'Completed',
                 'badge-danger': course.proposalStatus == 'Cancelled'}" style="float: right;width: fit-content;">
-                    {{course.proposalStatus =='Not Started' ? 'Available to Enroll' : course.proposalStatus }}</span>
+                    {{course.proposalStatus}}
+                </span>
+                <!-- {{course.proposalStatus =='Not Started' ? 'Available to Enroll' : course.proposalStatus }} -->
                 <div class="card-body">
                     <h5 class="card-title">{{course.technology | uppercase}}</h5>
                     <p class="card-text">{{course.description}}</p>
@@ -26,10 +28,53 @@
                     <p class="card-text lead"><span class=" badge badge-light">Mentor Name :
                             {{course.mentorname}}</span>
                     </p>
-                    <button *ngIf="course.proposalStatus =='Not Started'" class="btn btn-primary">Enroll</button>
+                    <!-- <button *ngIf="course.proposalStatus =='Not Started'" (click)="enroll(course)"
+                        class="btn btn-primary">Enroll</button> -->
 
                 </div>
             </div>
         </div>
 
     </div>
+    <p-dialog header="Enroll | Send Proposal To Mentor" [(visible)]="displayEnroll" [transitionOptions]="'0ms'"
+        [modal]="true" [baseZIndex]="10000" [draggable]="false" [resizable]="true">
+        <div class="ui-helper-clearfix" style="height: auto; width: 450px;margin-top: 0px;">
+            <p class="lead" style="text-align: justify;">
+                <span class="badge badge-dark"> Course Title :</span>
+                <span>
+                    {{courseEnroll.technology | uppercase}}</span>
+            </p>
+            <p class="lead " style="text-align: justify;">
+                <span class="badge badge-dark"> Course Description :</span>
+                <span>
+                    {{courseEnroll.description}}</span>
+            </p>
+            <p class="lead" style="text-align: justify;"><span class="badge badge-dark">Mentor
+                    :</span><span> {{courseEnroll.name}}</span>
+            </p>
+            <p class="lead" style="text-align: justify;"><span class="badge badge-dark">Fess
+                    :</span><span> ₹ {{courseEnroll.fees}}</span>
+            </p>
+            <hr class="line-hr">
+            <div class="form-group ">
+                <label for="description">Comments <span class="required"></span></label>
+                <textarea name="description" id="description" class="form-control" rows="2" placeholder="Enter comments"
+                    [(ngModel)]="courseEnroll.comments"></textarea>
+            </div>
+            <div class="form-group ">
+                <label for="fees">Proposed Amount <span class="required">*</span></label>
+                <input type="number" min="0" class="form-control" id="fees" placeholder="Enter Fess"
+                    [(ngModel)]="courseEnroll.proposalAmount">
+            </div>
+            <small id="" class="form-text text-muted">Note : Mentor will accept/reject your proposal within 24 hours
+                after
+                sending this proposal, Please send proposal to continue, Thanks!</small>
+        </div>
+        <p-footer>
+            <div *ngIf="msgStatus.status && msgStatus.popup" style="max-width: 300px;"
+                [ngClass]=" msgStatus.type ? 'lead alert alert-success': 'lead alert alert-danger'" role="alert">
+                {{msgStatus.message}}
+            </div>
+            <button type="button" class="btn btn-primary " (click)="sendProposal()">Submit Proposal</button>
+        </p-footer>
+    </p-dialog>
