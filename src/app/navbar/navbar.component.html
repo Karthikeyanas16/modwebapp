@@ -113,10 +113,10 @@
               style="font-size: 10px;">{{notification?.length ? notification.length : 0}}</span></a>
           <div class="dropdown-content">
             <a class="pull-left"><strong>Notifications</strong></a>
-            <p *ngFor="let notify of notification">
-              <span style="width: 20px !important;">{{notify.description}}</span>
-              <span style="width: 3px !important;"><i class="fa fa-pencil"></i></span>
-            </p>
+            <a *ngFor="let notify of notification">
+              <span style="width: 20px !important;"><i class="far fa-dot-circle"></i> {{notify.description}}</span>
+              <!-- <span style="width: 3px !important;"><i class="fa fa-pencil"></i></span> -->
+            </a>
             <a *ngIf="!notification?.length" style="text-align: center;">No notifications.</a>
           </div>
         </div>
