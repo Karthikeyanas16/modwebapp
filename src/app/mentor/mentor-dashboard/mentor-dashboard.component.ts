@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CourseService } from 'src/app/course.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 type NewType = any;
 
@@ -16,9 +16,12 @@ export class MentorDashboardComponent implements OnInit {
   searchSub: Subscription;
   search: string;
   private sub: any;
-  constructor(private courseService: CourseService, private routes: ActivatedRoute) { }
+  constructor(private courseService: CourseService, private routes: ActivatedRoute, private route: Router) { }
 
   ngOnInit(): void {
+    this.loadData();
+  }
+  loadData() {
     this.sub = this.routes.params.subscribe(params => {
       this.search = params['search'];
       this.search === 'list' ? this.getMentorCourses() : this.getCoursesByStatus();
@@ -77,6 +80,7 @@ export class MentorDashboardComponent implements OnInit {
     this.courseService.acceptProposal(reqBody).subscribe(res => {
       this.msgStatus.message = 'Proposal' + type + 'Successfully';
       this.msgStatus.status = false;
+      this.loadData();
     }, error => {
       console.log('error', error);
       let msg = 'Oops !! Something went wrong, please contact the administrator';
