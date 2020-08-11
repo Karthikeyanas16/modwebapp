@@ -6,7 +6,7 @@
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
             [globalFilterFields]="['name','user.name','user.status','status']">
             <ng-template pTemplate="caption">
-                <h4> <strong> MANAGE USERS </strong> </h4>
+                <h4> <strong> MANAGE STUDENTS </strong> </h4>
                 <div *ngIf="msgStatus.status && !msgStatus.popup" class="mt-5"
                     [ngClass]=" msgStatus.type ? 'lead alert alert-success': 'lead alert alert-danger'" role="alert">
                     {{msgStatus.message}}
