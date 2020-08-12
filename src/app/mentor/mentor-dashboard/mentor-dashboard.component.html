@@ -15,12 +15,12 @@
                     <h5 class="card-title">{{course.technology | uppercase}}</h5>
                     <p class="card-text">{{course.description}}</p>
                     <hr class="line-hr" />
-                    <p class="card-text"><span class=" badge badge-light">Student Comment :{{course.comments}}</span>
+                    <p class="card-text"><span class=" badge badge-light">Mentee Comment :{{course.comments}}</span>
                     </p>
                     <p class="card-text"><span class=" badge badge-light">Proposal Amount: ₹
                             {{course.proposalAmount}}</span>
                     </p>
-                    <p class="card-text lead"><span class=" badge badge-light">Student Name : {{course.username}}</span>
+                    <p class="card-text lead"><span class=" badge badge-light">Mentee: {{course.username}}</span>
                     </p>
                     <p *ngIf="course.proposalStatus == 'Not Started'" class="card-text" style="float: right;"><span
                             class="btn btn-info" (click)="acceptProposal(course,'Started')">Accept </span>
