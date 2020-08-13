@@ -86,7 +86,6 @@ export class CourseService {
         const url: any = `${environment.notificationService}/notification/get/` + this.authService.getAuthUser().id;
         return this.http.get(url).pipe(
             map(response => {
-                this.courses.next(response);
                 return response;
             })
         );

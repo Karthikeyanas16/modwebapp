@@ -172,11 +172,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       console.log('res==.', res);
       this.msgStatus.message = '';
       this.msgStatus.status = false;
-      if (!this.courseList.length) {
-        this.msgStatus.status = true;
-        this.msgStatus.message = 'Not record found !';
-        this.msgStatus.type = false;
-      }
     }, error => {
       console.log('error', error);
       let msg = 'Oops !! Something went wrong, please contact the administrator';
