@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit, ElementRef, HostListener, OnDestroy } from '@angular/core';
 import { CourseService } from '../course.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   msgStatus = { status: false, type: true, message: '', popup: false };
   courseList: any = [];
   enrolledCourses: any = [];
@@ -26,6 +26,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadData();
+  }
+  loadData() {
     this.isLoggedIn = this.authService.getIsAuth();
     if (this.isLoggedIn) {
       if (this.authService.getAuthUser().role !== 'user') {
@@ -37,7 +40,6 @@ export class HomeComponent implements OnInit {
       this.List = value;
       this.setData();
     });
-
   }
   getUserCourse() {
     this.courseService.getUserCourses().subscribe(
@@ -114,12 +116,16 @@ export class HomeComponent implements OnInit {
         proposalStatus: 'Not Started',
         mentor_id: this.courseEnroll.mentorId
       };
+      // tslint:disable-next-line:max-line-length
+      const msg = 'Hi, you have received one proposal from ' + this.authService.getAuthUser().name + ' for the ' + this.courseEnroll.technology + ' training.';
+      const obj = { user_id: this.courseEnroll.mentorId, description: msg, status: 0, created_on: new Date(), modified_on: new Date() };
       this.courseService.courseEnroll(reqBody).subscribe(res => {
         // console.log(res);
         this.msgStatus.status = true;
         this.msgStatus.popup = false;
         this.msgStatus.message = 'Proposal sent successfully.';
         this.displayEnroll = false;
+        if (res) { this.saveNotification(obj); }
         this.getCourseList();
         // tslint:disable-next-line:max-line-length
         this.courseEnroll = { id: '', user_id: '', technology_id: '', technology: '', name: '', description: '', comments: '', fees: '', proposalAmount: '', proposalStatus: 'Not Started' };
@@ -159,5 +165,30 @@ export class HomeComponent implements OnInit {
     this.courseList = this.List;
     // console.log('courseEnroll', JSON.stringify(this.courseList));
 
+  }
+  saveNotification(obj) {
+    console.log('obj', obj);
+    this.courseService.saveNotification(obj).subscribe(res => {
+      console.log('res==.', res);
+      this.msgStatus.message = '';
+      this.msgStatus.status = false;
+      if (!this.courseList.length) {
+        this.msgStatus.status = true;
+        this.msgStatus.message = 'Not record found !';
+        this.msgStatus.type = false;
+      }
+    }, error => {
+      console.log('error', error);
+      let msg = 'Oops !! Something went wrong, please contact the administrator';
+      if (error.error.message) {
+        msg = error.error.message;
+      }
+      this.msgStatus.status = true;
+      this.msgStatus.message = msg;
+      this.msgStatus.type = false;
+    });
+  }
+  ngOnDestroy() {
+    this.loadData();
   }
 }

@@ -94,4 +94,12 @@ export class CourseService {
             })
         );
     }
+    saveNotification(reqBody): Observable<any> {
+        const url: any = `${environment.notificationService}/notification/save`;
+        return this.http.post(url, reqBody).pipe(
+            map(response => {
+                return response;
+            })
+        );
+    }
 }
