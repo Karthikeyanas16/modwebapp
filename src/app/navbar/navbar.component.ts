@@ -97,4 +97,14 @@ export class NavbarComponent implements OnInit {
       this.msgStatus.type = false;
     });
   }
+  closeNotification() {
+    const obj = {
+      user_id: this.authService.getAuthUser().id
+    };
+    this.courseService.closeNotification(obj).subscribe(res => {
+      this.notification = [];
+    }, error => {
+      console.log('error', error);
+    });
+  }
 }
