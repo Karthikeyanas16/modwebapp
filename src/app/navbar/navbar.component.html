@@ -112,7 +112,10 @@
               style="font-size: 20px;"></i><span class="badge badge-pill badge-danger not-badge"
               style="font-size: 10px;">{{notification?.length ? notification.length : 0}}</span></a>
           <div class="dropdown-content">
-            <a class="pull-left"><strong>Notifications</strong></a>
+            <a style="float: right;margin-right: 5px;" *ngIf="notification?.length" (click)="closeNotification()"><i
+                class="fas fa-times"></i></a>
+            <a class="pull-left"><strong>Notifications</strong>
+            </a>
             <a *ngFor="let notify of notification">
               <span style="width: 20px !important;"><i class="far fa-dot-circle"></i> {{notify.description}}</span>
               <!-- <span style="width: 3px !important;"><i class="fa fa-pencil"></i></span> -->
