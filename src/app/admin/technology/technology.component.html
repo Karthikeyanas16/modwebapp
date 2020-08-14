@@ -37,7 +37,7 @@
                     <td style="width: 250px !important;">{{technology.description}}</td>
                     <td style="width: 100px !important;">{{technology.fees}}</td>
                     <td style="width: 100px !important;"><span
-                            [ngClass]="technology.status != 'Not Started' ? 'badge badge-success' : 'badge badge-danger'">{{technology.status == 'Not Started' ? 'Not Started' : 'Started'}}</span>
+                            [ngClass]="technology.status != 'Not Started' ? 'badge badge-success' : 'badge badge-danger'">{{technology.status == 'Not Started' ? 'InActive' : 'Active'}}</span>
                     </td>
                     <td style="width: 100px !important;cursor: pointer;"><span (click)="onEdit(technology);"><i
                                 class="fas fa-user-edit mr-3"></i></span>
@@ -70,11 +70,11 @@
             <div class="form-group">
                 <label class="radio-inline" style="margin:5px;">
                     <input type="radio" name="status" value="Not Started" [(ngModel)]="technology.status">
-                    Not Started
+                    InActive
                 </label>
                 <label class=" radio-inline" style="margin:5px;">
                     <input type="radio" name="status" value="Started" [(ngModel)]="technology.status">
-                    Started
+                    Active
                 </label>
             </div>
         </div>
