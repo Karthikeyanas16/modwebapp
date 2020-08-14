@@ -185,6 +185,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy() {
     this.searchSub.unsubscribe();
-    this.loadData();
+    // this.loadData();
   }
 }
