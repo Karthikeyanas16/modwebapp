@@ -62,7 +62,7 @@ export class SignupComponent implements OnInit {
         this.msgStatus.status = true;
         this.msgStatus.message = 'Sign Up Successful !';
         this.msgStatus.type = true;
-        this.route.navigate(['/auth/login']);
+        // this.route.navigate(['/auth/login']);
       }, error => {
         console.log('error', error);
         let msg = 'Oops !! Something went wrong, please contact the administrator';

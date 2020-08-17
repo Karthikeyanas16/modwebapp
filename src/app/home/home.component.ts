@@ -155,7 +155,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           if (Object.prototype.hasOwnProperty.call(this.enrolledCourses, k)) {
             const courses = this.enrolledCourses[k];
             if (element.id === courses.technology_id) {
-              element.status = 'Started';
+              element.status = 'Enrolled';
               // console.log(element, element.id);
             }
           }
