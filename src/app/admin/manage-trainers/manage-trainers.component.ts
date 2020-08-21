@@ -23,7 +23,9 @@ export class ManageTrainersComponent implements OnInit {
     this.getMentors();
   }
   onEdit(row: any) {
+    this.msgStatus.status = false;
     this.displayModal = true;
+    this.msgStatus.message = "";
     if (row) {
       const status: string = row.status === 0 ? '0' : '1';
       this.user.id = row.id;
@@ -35,8 +37,12 @@ export class ManageTrainersComponent implements OnInit {
     }
   }
   onDelete(id: any) {
+    this.msgStatus.message = "";
     this.displayDelete = true;
     this.selectedRowId = id;
+    this.msgStatus.status = false;
+    this.msgStatus.message = '';
+    this.msgStatus.popup = false;
   }
   delete() {
     this.msgStatus.status = false;
@@ -109,7 +115,7 @@ export class ManageTrainersComponent implements OnInit {
       this.msgStatus.popup = true;
     }
     setTimeout(() => {
-      this.msgStatus.status = false;
+    //  this.msgStatus.status = false;
     }, 3000);
   }
 

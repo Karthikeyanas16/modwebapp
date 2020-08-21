@@ -25,6 +25,8 @@ export class ManageUsersComponent implements OnInit {
   onEdit(row: any) {
     this.displayModal = true;
     console.log(row.status);
+    this.msgStatus.message = "";
+    this.msgStatus.status = false;
     const status: string = row.status === 0 ? '0' : '1';
     if (row) {
       this.user.id = row.id;
@@ -36,6 +38,7 @@ export class ManageUsersComponent implements OnInit {
     }
   }
   onDelete(id: any) {
+    this.msgStatus.status = false;
     this.displayDelete = true;
     this.selectedRowId = id;
     this.msgStatus.status = false;
@@ -43,6 +46,7 @@ export class ManageUsersComponent implements OnInit {
     this.msgStatus.popup = false;
   }
   delete() {
+    this.msgStatus.message = "";
     this.adminService.deleteUser(this.selectedRowId).subscribe(res => {
       const msg = 'User deleted successfully!';
       this.displayDelete = false;

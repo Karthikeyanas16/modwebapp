@@ -25,7 +25,9 @@ export class TechnologyComponent implements OnInit {
 
   onEdit(row: any) {
     console.log(row);
+    this.msgStatus.status = false;
     this.displayModal = true;
+    this.msgStatus.message = "";
     this.label = 'Add';
     this.technology = { id: '', technology: '', description: '', status: 'Not Started', fees: '0' };
     if (row) {
@@ -38,6 +40,7 @@ export class TechnologyComponent implements OnInit {
     }
   }
   onDelete(id: any) {
+    this.msgStatus.message = "";
     this.displayDelete = true;
     this.msgStatus.status = false;
     this.msgStatus.message = '';

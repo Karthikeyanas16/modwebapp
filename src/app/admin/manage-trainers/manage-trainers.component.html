@@ -19,7 +19,7 @@
             </ng-template>
             <ng-template pTemplate="header">
                 <tr>
-                    <th style="width: 50px !important;">Id</th>
+                    <!--<th style="width: 50px !important;">Id</th>-->
                     <th style="width: 250px !important;">Name</th>
                     <th style="width: 250px !important;">Email</th>
                     <th style="width: 100px !important;">Status</th>
@@ -29,7 +29,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-user>
                 <tr>
-                    <td style="width: 50px !important;">{{user.id}}</td>
+                    <!--<td style="width: 50px !important;">{{user.id}}</td>-->
                     <td style="width: 250px !important;">{{user.name}}</td>
                     <td style="width: 250px !important;">{{user.email}}</td>
                     <td style="width: 100px !important;"><span
@@ -80,7 +80,7 @@
 <p-dialog header="Delete Mentor" [(visible)]="displayDelete" [transitionOptions]="'0ms'" [modal]="true"
     [baseZIndex]="10000" [draggable]="false" [resizable]="true">
     <div class="ui-helper-clearfix" style="height: auto; width:auto;">
-        <label>Are you sure you want to delete this technology?</label>
+        <label>Are you sure you want to delete this Mentor?</label>
     </div>
     <p-footer>
         <div *ngIf="msgStatus.status && msgStatus.popup" style="max-width: 300px;"
